@@ -1,5 +1,5 @@
-import TextInput from "./TextInput";
-import EmailContextProvider from "./EmailContext";
+import TextInput from "../components/TextInput";
+import EmailContextProvider from "../contexts/EmailContext";
 
 export default function Home() {
   return (
