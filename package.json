@@ -19,6 +19,7 @@
   "homepage": "https://github.com/ThallyssonKlein/ProductLaunchTemplate#readme",
   "dependencies": {
     "@react-firebase/firestore": "^0.5.5",
+    "date-fns": "^2.21.0",
     "firebase": "^8.4.1",
     "next": "^10.1.3",
     "next-videos": "^1.4.0",

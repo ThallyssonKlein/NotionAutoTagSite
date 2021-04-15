@@ -5,7 +5,7 @@ import {
 } from "@react-firebase/firestore";
 import "firebase/firestore";
 import firebase from "firebase/app";
-import { EmailContext } from "./EmailContext";
+import { EmailContext } from "../contexts/EmailContext";
 import SubmitButton from "./SubmitButton";
 
 const config = {
