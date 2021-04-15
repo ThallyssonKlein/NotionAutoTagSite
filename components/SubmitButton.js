@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { EmailContext } from "./EmailContext";
+import { EmailContext } from "../contexts/EmailContext";
 
 export default function SubmitButton({runMutation}) {
   const { email, ValidateAndSubmit } = useContext(EmailContext);
