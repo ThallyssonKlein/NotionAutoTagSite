@@ -1,5 +1,6 @@
 import TextInput from "../components/TextInput";
 import EmailContextProvider from "../contexts/EmailContext";
+import video from './video.mp4';
 
 export default function Home() {
   return (
@@ -22,7 +23,7 @@ export default function Home() {
           <h1 style={{ fontFamily: "arial", color : "#d3d6d7" }}>
             Imagine that your Notion collections create a life of their own and start to organize themselves, what do you think?
           </h1>
-          <video src={require('./video.mp4')} autoPlay loop/>   
+          <video src={video} autoPlay loop/>   
           <div style={{marginTop : 50}}>
             <EmailContextProvider><TextInput/></EmailContextProvider>
           </div>
