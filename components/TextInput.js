@@ -36,7 +36,7 @@ export default function TextInput() {
                     <input
                       type="email"
                       placeholder="Type your e-mail to receive early access to the product"
-                      style={{ width: 500, marginRight: 10 }}
+                      style={{ width: 500, marginRight: 10, padding : 10, borderRadius : 10 }}
                       onKeyPress={(event) => onKeyPress(event.key, runMutation)}
                       value={email}
                       onChange={(e) => {
