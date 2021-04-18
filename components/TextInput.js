@@ -5,7 +5,7 @@ import {
 } from "@react-firebase/firestore";
 import "firebase/firestore";
 import firebase from "firebase/app";
-import { EmailContext } from "./EmailContext";
+import { EmailContext } from "../contexts/EmailContext";
 import SubmitButton from "./SubmitButton";
 
 const config = {
@@ -19,7 +19,9 @@ const config = {
 };
 
 export default function TextInput() {
-  const { email, setEmail, ValidateAndSubmit, setRunMutation } = useContext(EmailContext);
+  const { email, setEmail, ValidateAndSubmit, setRunMutation } = useContext(
+    EmailContext
+  );
   const collectionPath = "leads";
 
   function onKeyPress(key, runMutation) {
@@ -30,24 +32,25 @@ export default function TextInput() {
 
   return (
     <FirestoreProvider {...config} firebase={firebase}>
-        <FirestoreMutation path={collectionPath} type="add">
-          {({ runMutation }) => {
-            return <>
-                    <input
-                      type="email"
-                      placeholder="Type your e-mail to receive early access to the product"
-                      style={{ width: 500, marginRight: 10 }}
-                      onKeyPress={(event) => onKeyPress(event.key, runMutation)}
-                      value={email}
-                      onChange={(e) => {
-                        e.preventDefault();
-                        setEmail(e.target.value);
-                      }}
-                    />
-                    <SubmitButton runMutation={runMutation}/>
-                  </>
-          }}
-        </FirestoreMutation>
+      <FirestoreMutation path={collectionPath} type="add">
+        {({ runMutation }) => {
+          return (
+            <>
+              <input
+                type="email"
+                placeholder="Type your e-mail to receive early access to the product"
+                onKeyPress={(event) => onKeyPress(event.key, runMutation)}
+                value={email}
+                onChange={(e) => {
+                  e.preventDefault();
+                  setEmail(e.target.value);
+                }}
+              />
+              <SubmitButton runMutation={runMutation} />
+            </>
+          );
+        }}
+      </FirestoreMutation>
     </FirestoreProvider>
   );
 }
