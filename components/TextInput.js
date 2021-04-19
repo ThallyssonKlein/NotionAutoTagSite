@@ -1,3 +1,4 @@
+import React from 'react';
 import { useContext } from "react";
 import {
   FirestoreProvider,
@@ -21,6 +22,7 @@ const config = {
 export default function TextInput() {
   const { email, setEmail, ValidateAndSubmit } = useContext(EmailContext);
   const collectionPath = "leads";
+  var inputRef = React.createRef();
 
   function onKeyPress(key, runMutation) {
     if (key === "Enter") {
@@ -38,13 +40,12 @@ export default function TextInput() {
                 type="email"
                 placeholder={"Type your e-mail to receive early access to the product"}
                 onKeyPress={(event) => onKeyPress(event.key, runMutation)}
-                value={email}
                 onChange={(e) => {
-                  e.preventDefault();
                   setEmail(e.target.value);
                 }}
+                ref={inputRef}
               />
-              <SubmitButton runMutation={runMutation} />
+              <SubmitButton runMutation={runMutation} inputRef={inputRef}/>
             </>
           );
         }}
