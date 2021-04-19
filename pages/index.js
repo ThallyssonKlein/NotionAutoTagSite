@@ -1,5 +1,6 @@
 import TextInput from "../components/TextInput";
 import EmailContextProvider from "../contexts/EmailContext";
+import video from './video.mp4';
 
 export default function Home() {
   return (
@@ -12,7 +13,7 @@ export default function Home() {
           </h1>
         </div>
         <div className="video-wrapper">
-          <video src={require("./video.mp4")} autoPlay loop />
+            <video src={video} autoPlay loop/>   
         </div>
         <div className="email-input-wrapper">
           <EmailContextProvider>
