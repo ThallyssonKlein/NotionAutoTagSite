@@ -19,9 +19,7 @@ const config = {
 };
 
 export default function TextInput() {
-  const { email, setEmail, ValidateAndSubmit, setRunMutation } = useContext(
-    EmailContext
-  );
+  const { email, setEmail, ValidateAndSubmit } = useContext(EmailContext);
   const collectionPath = "leads";
 
   function onKeyPress(key, runMutation) {
@@ -38,7 +36,7 @@ export default function TextInput() {
             <>
               <input
                 type="email"
-                placeholder="Type your e-mail to receive early access to the product"
+                placeholder={"Type your e-mail to receive early access to the product"}
                 onKeyPress={(event) => onKeyPress(event.key, runMutation)}
                 value={email}
                 onChange={(e) => {

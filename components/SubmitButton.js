@@ -8,7 +8,6 @@ export default function SubmitButton({runMutation}) {
     <input
       type="button"
       value="Submit"
-      style={{padding : 10, color : "white", backgroundColor : "#46afcd", borderRadius : 10}}
       onClick={(e) => {
         ValidateAndSubmit(
           runMutation,
