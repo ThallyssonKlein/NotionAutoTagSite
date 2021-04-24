@@ -19,6 +19,7 @@ export default function UserContextProvider({children}){
     function ValidateAndSubmit(runMutation, email) {
         console.log(email);
         if (validateEmail(email)) {
+            alert('Saved successfully');
             Submit(runMutation, email);
         } else {
             alert("Please type a valid email!");
