@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { EmailContext } from "../contexts/EmailContext";
 
 export default function SubmitButton({runMutation, inputRef}) {
-  const { email, ValidateAndSubmit } = useContext(EmailContext);
+  const { ValidateAndSubmit } = useContext(EmailContext);
 
   return (
     <input
@@ -11,8 +11,7 @@ export default function SubmitButton({runMutation, inputRef}) {
       onClick={(e) => {
         inputRef.current.value = "";
         ValidateAndSubmit(
-          runMutation,
-          email
+          runMutation
         );
       }}
     />

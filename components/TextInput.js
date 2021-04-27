@@ -20,13 +20,13 @@ const config = {
 };
 
 export default function TextInput() {
-  const { email, setEmail, ValidateAndSubmit } = useContext(EmailContext);
+  const { setEmail, ValidateAndSubmit } = useContext(EmailContext);
   const collectionPath = "leads";
   var inputRef = React.createRef();
 
   function onKeyPress(key, runMutation) {
     if (key === "Enter") {
-      ValidateAndSubmit(runMutation, email);
+      ValidateAndSubmit(runMutation);
     }
   }
 
