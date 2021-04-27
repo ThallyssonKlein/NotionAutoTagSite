@@ -1,3 +1,4 @@
+import React from 'react';
 import { useContext } from "react";
 import {
   FirestoreProvider,
@@ -19,35 +20,36 @@ const config = {
 };
 
 export default function TextInput() {
-  const { email, setEmail, ValidateAndSubmit, setRunMutation } = useContext(EmailContext);
+  const { setEmail, ValidateAndSubmit } = useContext(EmailContext);
   const collectionPath = "leads";
+  var inputRef = React.createRef();
 
   function onKeyPress(key, runMutation) {
     if (key === "Enter") {
-      ValidateAndSubmit(runMutation, email);
+      ValidateAndSubmit(runMutation);
     }
   }
 
   return (
     <FirestoreProvider {...config} firebase={firebase}>
-        <FirestoreMutation path={collectionPath} type="add">
-          {({ runMutation }) => {
-            return <>
-                    <input
-                      type="email"
-                      placeholder="Type your e-mail to receive early access to the product"
-                      style={{ width: 500, marginRight: 10 }}
-                      onKeyPress={(event) => onKeyPress(event.key, runMutation)}
-                      value={email}
-                      onChange={(e) => {
-                        e.preventDefault();
-                        setEmail(e.target.value);
-                      }}
-                    />
-                    <SubmitButton runMutation={runMutation}/>
-                  </>
-          }}
-        </FirestoreMutation>
+      <FirestoreMutation path={collectionPath} type="add">
+        {({ runMutation }) => {
+          return (
+            <>
+              <input
+                type="email"
+                placeholder={"Type your e-mail to receive early access to the product"}
+                onKeyPress={(event) => onKeyPress(event.key, runMutation)}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+                ref={inputRef}
+              />
+              <SubmitButton runMutation={runMutation} inputRef={inputRef}/>
+            </>
+          );
+        }}
+      </FirestoreMutation>
     </FirestoreProvider>
   );
 }
