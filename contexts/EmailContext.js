@@ -1,18 +1,11 @@
-import { useState, createContext, useEffect } from 'react';
+import { createContext } from "react";
 
 export const EmailContext = createContext();
 
-export default function UserContextProvider({children}){
-    const [email, setEmail] = useState("");
-
-    useEffect(_ => {
-        console.log(email);
-    });
-
+export default function UserContextProvider({ children }) {
     async function Submit(runMutation, email) {
         await runMutation({ email });
-        setEmail("");
-        alert('Saved successfully');
+        alert("Saved successfully");
     }
 
     function validateEmail(email) {
@@ -20,8 +13,7 @@ export default function UserContextProvider({children}){
         return re.test(String(email).toLowerCase());
     }
 
-    function ValidateAndSubmit(runMutation) {
-        console.log(email);
+    function ValidateAndSubmit(email, runMutation) {
         if (validateEmail(email)) {
             Submit(runMutation, email);
         } else {
@@ -29,7 +21,9 @@ export default function UserContextProvider({children}){
         }
     }
 
-    return <EmailContext.Provider value={{ setEmail, ValidateAndSubmit }}>
-        {children}
-    </EmailContext.Provider>
+    return (
+        <EmailContext.Provider value={{ ValidateAndSubmit }}>
+            {children}
+        </EmailContext.Provider>
+    );
 }
