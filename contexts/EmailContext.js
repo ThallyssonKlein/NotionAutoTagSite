@@ -2,7 +2,7 @@ import { createContext } from "react";
 
 export const EmailContext = createContext();
 
-export default function UserContextProvider({ children }) {
+export default function EmailContextProvider({ children }) {
     async function Submit(runMutation, email) {
         await runMutation({ email });
         alert("Saved successfully");
