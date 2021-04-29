@@ -1,5 +1,4 @@
-import React from "react";
-import { useContext } from "react";
+import { useContext, createRef } from "react";
 import {
     FirestoreProvider,
     FirestoreMutation,
@@ -22,7 +21,7 @@ const config = {
 export default function TextInput() {
     const { ValidateAndSubmit } = useContext(EmailContext);
     const collectionPath = "leads";
-    var inputRef = React.createRef();
+    const inputRef = createRef();
 
     function onKeyPress(key, runMutation) {
         if (key === "Enter") {
@@ -51,6 +50,16 @@ export default function TextInput() {
                                 runMutation={runMutation}
                                 inputRef={inputRef}
                             />
+                            <style jsx>
+                                {`
+                                    input[type="email"] {
+                                        max-width: 34.5rem;
+                                        border-radius: 1rem;
+                                        padding: 1rem;
+                                        flex: 1;
+                                    }
+                                `}
+                            </style>
                         </>
                     );
                 }}
