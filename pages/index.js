@@ -35,16 +35,14 @@ export default function Home() {
                         margin: 0 auto;
                         padding: 2rem;
                     }
-
                     .main-text-wrapper h1 {
                         color: white;
                         font-size: clamp(2rem, 2vw, 4rem);
                         text-align: center;
-                        font-family: Arial;
                     }
-
                     .video-wrapper video {
                         width: 100%;
+                        border-radius: .4rem;
                     }
                     .email-input-wrapper {
                         display: flex;

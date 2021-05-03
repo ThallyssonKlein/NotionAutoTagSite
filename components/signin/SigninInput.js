@@ -7,7 +7,9 @@ export default function SigninInput() {
     const inputRef = useRef();
 
     function onKeyPress(key) {
-        key === "Enter" ? checkIfTokenExists(inputRef.current.value) : null;
+        return key === "Enter"
+            ? checkIfTokenExists(inputRef.current.value)
+            : null;
     }
 
     return (
@@ -23,21 +25,22 @@ export default function SigninInput() {
                 <span className="token-validity">Invalid token</span>
             </div>
             <SigninButton inputRef={inputRef} />
-            <style jsx>{`
-                .input-wrapper input {
-                    max-width: 34.5rem;
-                    border-radius: 1rem;
-                    padding: 1rem;
-                }
-                .token-validity {
-                    margin-top: 0.5rem;
-                    text-align: center;
-                    font-size: 1.2rem;
-                    font-family: Arial, Helvetica, sans-serif;
-                    font-weight: bold;
-                    color: hsl(0, 80%, 60%);
-                }
-            `}</style>
+            <style jsx>
+                {`
+                    .input-wrapper input {
+                        max-width: 34.5rem;
+                        border-radius: 1rem;
+                        padding: 1rem;
+                    }
+                    .token-validity {
+                        margin-top: 0.5rem;
+                        text-align: center;
+                        font-size: 1.2rem;
+                        font-weight: bold;
+                        color: hsl(0, 80%, 60%);
+                    }
+                `}
+            </style>
             <style jsx>
                 {`
                     .token-validity {
