@@ -1,17 +1,6 @@
 import { useRef, useState } from "react";
-import firebase from "firebase/app";
-import "firebase/firestore";
 import TokenInstructions from "./TokenInstructions";
-
-const config = {
-    apiKey: process.env.NEXT_PUBLIC_API_KEY,
-    authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
-    projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
-    storageBucket: process.env.NEXT_PUBLIC_STORAGE_BUCKET,
-    messagingSenderId: process.env.NEXT_PUBLIC_MESSAGING_SENDER_ID,
-    appId: process.env.NEXT_PUBLIC_APP_ID,
-    measurementId: process.env.NEXT_PUBLIC_MEASUREMENT_ID,
-};
+import firestore from "../../utils/firestore";
 
 export default function Modal({ setModal, setSavedToken }) {
     const [accordion, setAccordion] = useState(false);
@@ -29,21 +18,15 @@ export default function Modal({ setModal, setSavedToken }) {
             return setValidity(false);
         }
 
-        if (!firebase.apps.length) {
-            firebase.initializeApp(config);
-        }
-
-        const db = firebase.firestore();
-
-        const collection = await db.collection("authorizations").get();
+        const collection = await firestore.connect
+            .collection("authorizations")
+            .get();
 
         collection.forEach(async (doc) => {
             if (doc.get("email")) {
                 setValidity(true);
-                setSavedToken(true);
-                setTimeout(() => setSavedToken(false), 2000);
                 const leadData = doc.data();
-                const leadCollection = db
+                const leadCollection = firestore.connect
                     .collection("authorizations")
                     .doc(doc.ref.id);
 
@@ -51,6 +34,9 @@ export default function Modal({ setModal, setSavedToken }) {
                     ...leadData,
                     token_v2: token,
                 });
+
+                setSavedToken(true);
+                setTimeout(() => setSavedToken(false), 2000);
             } else {
                 return console.log("There was an error");
             }
@@ -95,7 +81,7 @@ export default function Modal({ setModal, setSavedToken }) {
                                     : null
                             }
                         >
-                            How to get your Notion token?
+                            How to get your Notion <wbr/>token?
                         </p>
                     </div>
                     <div className="buttons">
