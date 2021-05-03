@@ -33,36 +33,32 @@ export default function TextInput() {
     return (
         <FirestoreProvider {...config} firebase={firebase}>
             <FirestoreMutation path={collectionPath} type="add">
-                {({ runMutation }) => {
-                    return (
-                        <>
-                            <input
-                                type="email"
-                                placeholder={
-                                    "Type your e-mail to receive early access to the product"
+                {({ runMutation }) => (
+                    <>
+                        <input
+                            type="email"
+                            placeholder="Type your e-mail to receive early access to the product"
+                            onKeyPress={(event) => {
+                                onKeyPress(event.key, runMutation);
+                            }}
+                            ref={inputRef}
+                        />
+                        <SubmitButton
+                            runMutation={runMutation}
+                            inputRef={inputRef}
+                        />
+                        <style jsx>
+                            {`
+                                input[type="email"] {
+                                    max-width: 34.5rem;
+                                    border-radius: 1rem;
+                                    padding: 1rem;
+                                    flex: 1;
                                 }
-                                onKeyPress={(event) => {
-                                    onKeyPress(event.key, runMutation);
-                                }}
-                                ref={inputRef}
-                            />
-                            <SubmitButton
-                                runMutation={runMutation}
-                                inputRef={inputRef}
-                            />
-                            <style jsx>
-                                {`
-                                    input[type="email"] {
-                                        max-width: 34.5rem;
-                                        border-radius: 1rem;
-                                        padding: 1rem;
-                                        flex: 1;
-                                    }
-                                `}
-                            </style>
-                        </>
-                    );
-                }}
+                            `}
+                        </style>
+                    </>
+                )}
             </FirestoreMutation>
         </FirestoreProvider>
     );

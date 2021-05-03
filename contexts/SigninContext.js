@@ -16,7 +16,6 @@ const config = {
 export const SigninContext = createContext();
 
 export default function SigninContextProvider({ children }) {
-    const [email, setEmail] = useState("");
     const [tokenValidity, setTokenValidity] = useState(true);
 
     const router = useRouter();
@@ -32,8 +31,8 @@ export default function SigninContextProvider({ children }) {
         const collection = await db.collection("authorizations").get();
 
         collection.forEach((doc) => {
-            if (doc.data().token === token) {
-                setEmail(doc.data().email);
+            if (doc.get("token") === token) {
+                localStorage.setItem("email", doc.data().email);
 
                 setTokenValidity(true);
 
@@ -46,7 +45,7 @@ export default function SigninContextProvider({ children }) {
 
     return (
         <SigninContext.Provider
-            value={{ email, checkIfTokenExists, tokenValidity }}
+            value={{ checkIfTokenExists, tokenValidity }}
         >
             {children}
         </SigninContext.Provider>

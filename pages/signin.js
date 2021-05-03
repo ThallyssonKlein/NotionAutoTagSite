@@ -9,7 +9,8 @@ export default function SignIn() {
                 <div className="content">
                     <div className="main-text-wrapper">
                         <h1>
-                            Got your token? Great. <br />
+                            Got your token? Great.
+                            <br />
                             Paste it below to sign in:
                         </h1>
                     </div>
@@ -31,7 +32,6 @@ export default function SignIn() {
                         color: white;
                         font-size: clamp(2rem, 2vw, 4rem);
                         text-align: center;
-                        font-family: Arial;
                     }
                     .token-wrapper {
                         display: flex;

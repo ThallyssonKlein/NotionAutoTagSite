@@ -21,7 +21,8 @@ export default function SubmitButton({ runMutation, inputRef }) {
                         padding: 0.5rem 1rem;
                         background-color: hsl(193, 57%, 54%);
                         font-size: 2rem;
-                        color: white;
+                        font-weight: 500;
+                        color: hsl(193, 100%, 10%);
                         margin-left: 1rem;
                         flex: 0.1;
                         cursor: pointer;
@@ -29,6 +30,7 @@ export default function SubmitButton({ runMutation, inputRef }) {
                     }
                     input[type="button"]:hover {
                         background-color: hsl(193, 57%, 34%);
+                        color: hsl(193, 100%, 0%);
                     }
                 `}
             </style>
