@@ -1,34 +1,30 @@
 import { useContext } from "react";
-import { EmailContext } from "../contexts/EmailContext";
+import { SigninContext } from "../../contexts/SigninContext";
 
-export default function SubmitButton({ runMutation, inputRef }) {
-    const { ValidateAndSubmit } = useContext(EmailContext);
+export default function SigninButton() {
+    const { checkIfTokenExists } = useContext(SigninContext);
 
     return (
         <>
-            <input
-                type="button"
-                value="Submit"
-                onClick={() => {
-                    ValidateAndSubmit(inputRef.current.value, runMutation);
-                    inputRef.current.value = "";
-                }}
-            />
+            <div className="button-wrapper">
+                <button type="button" onClick={() => checkIfTokenExists()}>
+                    Sign in
+                </button>
+            </div>
             <style jsx>
                 {`
-                    input[type="button"] {
+                    .button-wrapper button {
                         border-radius: 1rem;
-                        padding: 0.5rem 1rem;
+                        padding: 0.6rem 1rem;
                         background-color: hsl(193, 57%, 54%);
                         font-size: 2rem;
                         font-weight: 500;
                         color: hsl(193, 100%, 10%);
                         margin-left: 1rem;
-                        flex: 0.1;
                         cursor: pointer;
                         transition: background 0.2s ease;
                     }
-                    input[type="button"]:hover {
+                    .button-wrapper button:hover {
                         background-color: hsl(193, 57%, 34%);
                         color: hsl(193, 100%, 0%);
                     }
