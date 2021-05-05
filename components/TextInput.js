@@ -3,7 +3,7 @@ import {
     FirestoreProvider,
     FirestoreMutation,
 } from "@react-firebase/firestore";
-import firebse from "firebase/app";
+import firebase from "firebase/app";
 import { EmailContext } from "../contexts/EmailContext";
 import SubmitButton from "./SubmitButton";
 import config from "../utils/firestoreConfig";
