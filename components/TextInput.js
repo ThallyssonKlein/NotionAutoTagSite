@@ -17,7 +17,7 @@ export default function TextInput() {
     function onKeyPress(key, runMutation) {
         if (key === "Enter") {
             ValidateAndSubmit(inputRef.current.value, runMutation);
-            inputRef.current.value = "";
+            inputRef.current.value = ""
         }
     }
 
