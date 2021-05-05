@@ -4,6 +4,7 @@ import {
     FirestoreMutation,
 } from "@react-firebase/firestore";
 import firebase from "firebase/app";
+import "firebase/firestore";
 import { EmailContext } from "../contexts/EmailContext";
 import SubmitButton from "./SubmitButton";
 import config from "../utils/firestoreConfig";
