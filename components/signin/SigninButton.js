@@ -1,13 +1,16 @@
 import { useContext } from "react";
 import { SigninContext } from "../../contexts/SigninContext";
 
-export default function SigninButton() {
+export default function SigninButton({ inputRef }) {
     const { checkIfTokenExists } = useContext(SigninContext);
 
     return (
         <>
             <div className="button-wrapper">
-                <button type="button" onClick={() => checkIfTokenExists()}>
+                <button
+                    type="button"
+                    onClick={() => checkIfTokenExists(inputRef.current.value)}
+                >
                     Sign in
                 </button>
             </div>
