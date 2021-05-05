@@ -3,8 +3,8 @@ import {
     FirestoreProvider,
     FirestoreMutation,
 } from "@react-firebase/firestore";
-import firebase from "firebase/app";
 import "firebase/firestore";
+import firebase from "firebase/app";
 import { EmailContext } from "../contexts/EmailContext";
 import SubmitButton from "./SubmitButton";
 import config from "../utils/firestoreConfig";
@@ -17,7 +17,7 @@ export default function TextInput() {
     function onKeyPress(key, runMutation) {
         if (key === "Enter") {
             ValidateAndSubmit(inputRef.current.value, runMutation);
-            inputRef.current.value = ""
+            inputRef.current.value = "";
         }
     }
 
