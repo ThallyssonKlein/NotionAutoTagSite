@@ -1,6 +1,6 @@
 import SigninContextProvider from "../contexts/SigninContext";
 import GlobalStyles from "../components/GlobalStyles";
-import SigninInput from "../components/signin/SigninInput";
+import SigninInput from "../components/signin/TextInput";
 
 export default function SignIn() {
     return (
@@ -23,10 +23,22 @@ export default function SignIn() {
             </main>
             <style jsx>
                 {`
+                    main {
+                        padding: 2rem;
+                    }
                     .content {
                         display: grid;
                         grid-template: repeat(3, min-content) / 1fr;
-                        gap: 2rem;
+
+                        box-shadow: var(--outside-box-shadow);
+                        border-radius: 0.3rem;
+                        overflow: hidden;
+                    }
+                    .main-text-wrapper {
+                        // background-color: var(
+                        //     --complementary-background-color-3
+                        // );
+                        padding: 1rem;
                     }
                     .main-text-wrapper h1 {
                         color: white;
@@ -36,6 +48,12 @@ export default function SignIn() {
                     .token-wrapper {
                         display: flex;
                         justify-content: center;
+                        flex-wrap: wrap;
+
+                        background-color: var(
+                            --complementary-background-color-2
+                        );
+                        padding: 1rem;
                     }
                 `}
             </style>

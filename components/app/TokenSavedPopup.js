@@ -1,4 +1,4 @@
-export default function TokenSaved() {
+export default function TokenSavedPopup() {
     return (
         <>
             <div className="saved-popup">
@@ -10,8 +10,9 @@ export default function TokenSaved() {
                         position: absolute;
                         bottom: 2rem;
                         left: 2rem;
-                        box-shadow: inset 0 0.1rem 0.4rem hsla(0, 0%, 0%, 0.25);
-                        background-color: hsl(220, 10%, 11%);
+                        box-shadow: inset 0 0.1rem 0.4rem
+                            var(--outside-box-shadow);
+                        background-color: var(--background-color);
                         border-radius: 0.4rem;
                     }
                     .saved-popup p {

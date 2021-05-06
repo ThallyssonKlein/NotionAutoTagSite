@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Gear from "../components/app/GearIcon";
 import Modal from "../components/app/Modal";
-import TokenSaved from "../components/app/TokenSaved";
+import TokenSaved from "../components/app/TokenSavedPopup";
 import GlobalStyles from "../components/GlobalStyles";
 
 export default function App() {
@@ -43,7 +43,7 @@ export default function App() {
                     .modal-wrapper {
                         width: 100vw;
                         height: 100%;
-                        background-color: hsla(0, 0%, 0%, 0.6);
+                        background-color: rgba(15, 15, 15, 0.6);
                         position: absolute;
                         top: 0;
                         left: 0;

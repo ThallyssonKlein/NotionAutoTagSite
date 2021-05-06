@@ -1,5 +1,5 @@
 import { useRef, useContext } from "react";
-import SigninButton from "./SigninButton";
+import SigninButton from "./SubmitButton";
 import { SigninContext } from "../../contexts/SigninContext";
 
 export default function SigninInput() {
@@ -28,9 +28,22 @@ export default function SigninInput() {
             <style jsx>
                 {`
                     .input-wrapper input {
-                        max-width: 34.5rem;
-                        border-radius: 1rem;
-                        padding: 1rem;
+                        max-width: 35rem;
+                        height: 3rem;
+                        border-radius: 0.3rem;
+                        padding: 0.4rem 1rem;
+                        flex: 1;
+                        background-color: var(--input-background);
+                        color: var(--highlighted-font-color);
+                        font-weight: 500;
+                        box-shadow: var(--inside-box-shadow);
+                    }
+                    .input-wrapper input::placeholder {
+                        color: var(--font-color);
+                        font-weight: 400;
+                    }
+                    .input-wrapper input:focus-within {
+                        box-shadow: var(--input-focus-highlight);
                     }
                     .token-validity {
                         margin-top: 0.5rem;
