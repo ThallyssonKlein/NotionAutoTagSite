@@ -1,6 +1,6 @@
 import SigninContextProvider from "../contexts/SigninContext";
 import GlobalStyles from "../components/GlobalStyles";
-import SigninInput from "../components/signin/TextInput";
+import TextInput from "../components/login/TextInput";
 
 export default function SignIn() {
     return (
@@ -16,7 +16,7 @@ export default function SignIn() {
                     </div>
                     <div className="token-wrapper">
                         <SigninContextProvider>
-                            <SigninInput />
+                            <TextInput />
                         </SigninContextProvider>
                     </div>
                 </div>
@@ -35,9 +35,6 @@ export default function SignIn() {
                         overflow: hidden;
                     }
                     .main-text-wrapper {
-                        // background-color: var(
-                        //     --complementary-background-color-3
-                        // );
                         padding: 1rem;
                     }
                     .main-text-wrapper h1 {
