@@ -17,13 +17,15 @@ export default function SigninContextProvider({ children }) {
         collection.forEach((doc) => {
             if (doc.get("token") === token) {
                 localStorage.setItem("email", doc.get("email"));
-                console.log(localStorage.getItem("email"));
 
                 setTokenValidity(true);
 
                 router.push("/app");
+
+                return;
             } else {
                 setTokenValidity(false);
+                return;
             }
         });
     }

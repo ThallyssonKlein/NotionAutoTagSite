@@ -3,13 +3,15 @@ import {
     FirestoreProvider,
     FirestoreMutation,
 } from "@react-firebase/firestore";
+import "firebase/firestore";
+import firebase from "firebase/app";
 import { EmailContext } from "../contexts/EmailContext";
 import SubmitButton from "./SubmitButton";
 import config from "../utils/firestoreConfig";
 
 export default function TextInput() {
     const { ValidateAndSubmit } = useContext(EmailContext);
-    const collectionPath = "leads";
+    const collectionPath = "authorizations";
     const inputRef = createRef();
 
     function onKeyPress(key, runMutation) {
