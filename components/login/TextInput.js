@@ -1,5 +1,5 @@
 import { useRef, useContext } from "react";
-import SigninButton from "./SubmitButton";
+import SubmitButton from "./SubmitButton";
 import { SigninContext } from "../../contexts/SigninContext";
 
 export default function SigninInput() {
@@ -24,7 +24,7 @@ export default function SigninInput() {
                 />
                 <span className="token-validity">Invalid token</span>
             </div>
-            <SigninButton inputRef={inputRef} />
+            <SubmitButton inputRef={inputRef} />
             <style jsx>
                 {`
                     .input-wrapper input {

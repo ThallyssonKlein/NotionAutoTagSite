@@ -189,33 +189,37 @@ export default function Modal({ setModal, setSavedToken }) {
                         padding: 0.5rem;
                         border-radius: 0.3rem;
                     }
+                    .how-to {
+                        flex: 1 1 50%;
+                    }
                     .how-to svg {
-                        width: 1.2rem;
-                        height: 1.2rem;
+                        height: min-content;
                         margin-right: 0.8rem;
+                        flex: 0 0 1.2rem;
                     }
                     .how-to p {
+                        flex: 1 0 12.5rem;
                         display: inline-block;
                         font-size: 1.5rem;
                         color: var(--highlighted-font-color);
                         cursor: pointer;
                         position: relative;
                     }
-                    .confirm-config .buttons {
+                    .buttons {
                         justify-content: flex-end;
                         display: flex;
                         flex: 1;
                     }
-                    .confirm-config button {
+                    .buttons button {
                         height: 3rem;
                         border-radius: 0.3rem;
                         padding: 0rem 1rem;
                         font-size: 1.8rem;
                         font-weight: 500;
                         color: white;
-                        margin-left: 1rem;
                         cursor: pointer;
                         transition: background 0.2s ease;
+                        margin-left: 1rem;
                     }
                     .close-button button {
                         font-weight: 400;
@@ -239,20 +243,24 @@ export default function Modal({ setModal, setSavedToken }) {
                     .instructions {
                         grid-column: 1 / 3;
                     }
-                    @media only screen and (max-width: 412px) {
+                    @media only screen and (max-width: 382px) {
                         .how-to {
                             order: 1;
-                            margin-right: initial;
-                            margin-top: 2rem;
-                            display: flex;
                             justify-content: center;
+                            margin-top: 1rem;
                         }
-                        .confirm-config .buttons {
-                            order: 0;
+                        .how-to p {
+                            flex: initial;
+                        }
+                        .confirm-config {
+                            flex-direction: column;
+                        }
+                        .buttons {
+                            width: 100%;
                             justify-content: space-between;
                         }
-                        .instructions {
-                            margin-top: 1rem;
+                        .buttons button {
+                            margin-left: initial;
                         }
                     }
                 `}
