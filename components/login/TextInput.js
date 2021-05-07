@@ -42,7 +42,7 @@ export default function SigninInput() {
                         color: var(--font-color);
                         font-weight: 400;
                     }
-                    .input-wrapper input:focus-within {
+                    .input-wrapper input:focus {
                         box-shadow: var(--input-focus-highlight);
                     }
                     .token-validity {
@@ -50,7 +50,7 @@ export default function SigninInput() {
                         text-align: center;
                         font-size: 1.2rem;
                         font-weight: bold;
-                        color: hsl(0, 80%, 60%);
+                        color: var(--error-color);
                     }
                 `}
             </style>

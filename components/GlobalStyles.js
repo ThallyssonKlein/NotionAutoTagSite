@@ -8,7 +8,6 @@ export default function GlobalStyles({ children }) {
                         padding: 0;
                         margin: 0;
                         border: 0;
-                        outline: none;
                         box-sizing: border-box;
                     }
                     :root {
@@ -17,7 +16,7 @@ export default function GlobalStyles({ children }) {
                         --background-color: #2f3437;
                         --complementary-background-color: #373c3f;
                         --complementary-background-color-2: #3f4447;
-                        --complementary-background-color-3: #494E50;
+                        --complementary-background-color-3: #494e50;
 
                         --highlighted-font-color: #ffffffe6;
                         --font-color: #ffffff99;
@@ -34,12 +33,18 @@ export default function GlobalStyles({ children }) {
                             0px 2px 4px rgba(15, 15, 15, 0.2);
                         --inside-box-shadow: inset 0px 0px 0px 1px
                             rgba(15, 15, 15, 0.2);
+
                         --input-background: #0f0f0f4d;
                         --input-focus-highlight: inset 0px 0px 0px 1px
                                 rgba(46, 170, 220, 0.7),
                             0px 0px 0px 2px rgba(46, 170, 220, 0.4);
 
                         --text-selection-background-color: #2f5669;
+
+                        --error-color: #eb5757;
+
+                        --anchor-color: #2eaadc;
+                        --hovered-anchor-color: #3094b0;
                     }
                     label,
                     h1,
@@ -59,7 +64,7 @@ export default function GlobalStyles({ children }) {
                     p::selection,
                     li::selection,
                     span::selection,
-                    br::selection
+                    br::selection,
                     a::selection {
                         background-color: var(
                             --text-selection-background-color
@@ -67,6 +72,10 @@ export default function GlobalStyles({ children }) {
                     }
                     li {
                         list-style-type: none;
+                    }
+                    input[type="text"],
+                    input[type="email"] {
+                        outline: none;
                     }
                     main {
                         display: flex;

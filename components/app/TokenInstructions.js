@@ -3,16 +3,14 @@ export default function TokenInstructions() {
         <>
             <ol>
                 <li>
-                    Go to
-                    {" "}
+                    Go to{" "}
                     <a
                         href="http://www.notion.so"
                         target="_blank"
                         rel="noreferrer"
                     >
                         www.notion.so
-                    </a>
-                    {" "}
+                    </a>{" "}
                     and log in into your account
                 </li>
                 <li>
@@ -37,14 +35,14 @@ export default function TokenInstructions() {
                         list-style-position: inside;
                         font-size: 1.6rem;
                         margin-top: 0.5rem;
-                        color: hsl(0, 0%, 84%);
+                        color: var(--highlighted-font-color);
                     }
                     a {
                         text-decoration: none;
-                        color: hsl(193, 57%, 54%);
+                        color: var(--anchor-color);
                     }
                     a:hover {
-                        color: hsl(193, 57%, 44%);
+                        color: var(--hovered-anchor-color);
                     }
                 `}
             </style>
