@@ -40,7 +40,7 @@ export default function TextInput() {
                         />
                         <style jsx>
                             {`
-                                input[type="email"] {
+                                input {
                                     max-width: 35rem;
                                     height: 3rem;
                                     border-radius: 0.3rem;
@@ -51,11 +51,11 @@ export default function TextInput() {
                                     font-weight: 500;
                                     box-shadow: var(--inside-box-shadow);
                                 }
-                                input[type="email"]::placeholder {
+                                input::placeholder {
                                     color: var(--font-color);
                                     font-weight: 400;
                                 }
-                                input[type="email"]:focus-within {
+                                input:focus {
                                     box-shadow: var(--input-focus-highlight);
                                 }
                             `}
