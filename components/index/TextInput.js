@@ -5,9 +5,9 @@ import {
 } from "@react-firebase/firestore";
 import "firebase/firestore";
 import firebase from "firebase/app";
-import { EmailContext } from "../contexts/EmailContext";
+import { EmailContext } from "../../contexts/EmailContext";
 import SubmitButton from "./SubmitButton";
-import config from "../utils/firestoreConfig";
+import config from "../../utils/firestoreConfig";
 
 export default function TextInput() {
     const { ValidateAndSubmit } = useContext(EmailContext);
@@ -41,10 +41,22 @@ export default function TextInput() {
                         <style jsx>
                             {`
                                 input[type="email"] {
-                                    max-width: 34.5rem;
-                                    border-radius: 1rem;
-                                    padding: 1rem;
+                                    max-width: 35rem;
+                                    height: 3rem;
+                                    border-radius: 0.3rem;
+                                    padding: 0.4rem 1rem;
                                     flex: 1;
+                                    background-color: var(--input-background);
+                                    color: var(--highlighted-font-color);
+                                    font-weight: 500;
+                                    box-shadow: var(--inside-box-shadow);
+                                }
+                                input[type="email"]::placeholder {
+                                    color: var(--font-color);
+                                    font-weight: 400;
+                                }
+                                input[type="email"]:focus-within {
+                                    box-shadow: var(--input-focus-highlight);
                                 }
                             `}
                         </style>

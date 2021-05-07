@@ -1,5 +1,6 @@
 import GlobalStyles from "../components/GlobalStyles";
-import TextInput from "../components/TextInput";
+import TextInput from "../components/index/TextInput";
+import VideoAndEmailWrapper from "../components/index/VideoAndEmailWrapper";
 import EmailContextProvider from "../contexts/EmailContext";
 import video from "./video.mp4";
 
@@ -15,14 +16,22 @@ export default function Home() {
                             do you think?
                         </h1>
                     </div>
-                    <div className="video-wrapper">
-                        <video src={video} playsInline autoPlay muted loop />
-                    </div>
-                    <div className="email-input-wrapper">
-                        <EmailContextProvider>
-                            <TextInput />
-                        </EmailContextProvider>
-                    </div>
+                    <VideoAndEmailWrapper>
+                        <div className="video-wrapper">
+                            <video
+                                src={video}
+                                playsInline
+                                autoPlay
+                                muted
+                                loop
+                            />
+                        </div>
+                        <div className="email-input-wrapper">
+                            <EmailContextProvider>
+                                <TextInput />
+                            </EmailContextProvider>
+                        </div>
+                    </VideoAndEmailWrapper>
                 </div>
             </main>
             <style jsx>
@@ -40,14 +49,19 @@ export default function Home() {
                         font-size: clamp(2rem, 2vw, 4rem);
                         text-align: center;
                     }
+                    .video-wrapper {
+                        border-bottom: 0.1rem solid rgba(255, 255, 255, 0.1);
+                    }
                     .video-wrapper video {
                         width: 100%;
-                        border-radius: .4rem;
+                        border-radius: 0.4rem;
                     }
                     .email-input-wrapper {
                         display: flex;
-                        flex-direction: row;
                         justify-content: center;
+                        flex-wrap: wrap;
+                        padding: 1rem;
+                        background-color: var(--complementary-background-color-2);
                     }
                 `}
             </style>

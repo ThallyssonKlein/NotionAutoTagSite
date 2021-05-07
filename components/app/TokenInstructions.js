@@ -30,9 +30,6 @@ export default function TokenInstructions() {
             <style jsx>
                 {`
                     ol {
-                        border: 0.2rem solid hsl(220, 10%, 11%);
-                        border-radius: 0.4rem;
-                        box-shadow: inset 0 0.1rem 0.4rem hsla(0, 0%, 0%, 0.25);
                         padding: 1rem;
                     }
                     li {

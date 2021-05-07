@@ -73,6 +73,18 @@ export default function Modal({ setModal, setSavedToken }) {
                         onClick={() => setAccordion(!accordion)}
                         aria-hidden="true"
                     >
+                        <svg
+                            width="60"
+                            height="52"
+                            viewBox="0 0 60 52"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                        >
+                            <path
+                                d="M60 26L0 51.9808V0.0192375L60 26Z"
+                                fill="#C4C4C4"
+                            />
+                        </svg>
                         <p
                             tabIndex="0"
                             onKeyPress={({ key }) =>
@@ -81,7 +93,7 @@ export default function Modal({ setModal, setSavedToken }) {
                                     : null
                             }
                         >
-                            How to get your Notion <wbr/>token?
+                            How to get your Notion token?
                         </p>
                     </div>
                     <div className="buttons">
@@ -112,120 +124,143 @@ export default function Modal({ setModal, setSavedToken }) {
             <style jsx>
                 {`
                     .modal {
-                        background-color: hsl(210, 5%, 17%);
+                        background-color: var(--background-color);
                         width: 80vw;
                         max-width: 50rem;
                         height: min-content;
-                        padding: 2rem;
-                        border-radius: 0.4rem;
+                        border-radius: 0.3rem;
+                        box-shadow: var(--outside-box-shadow);
+                        overflow: hidden;
                     }
                     .container {
                         display: flex;
                         flex-direction: column;
                         justify-content: center;
                         align-items: center;
-                        background-color: hsl(220, 10%, 11%);
-                        border-radius: 0.4rem;
-                        padding: 2rem;
-                        box-shadow: inset 0 0.1rem 0.4rem hsla(0, 0%, 0%, 0.25);
+                        border-bottom: 0.1rem solid rgba(255, 255, 255, 0.1);
+                        padding: 1rem;
                     }
                     .main-text-wrapper h1 {
-                        font-family: Roboto;
                         font-weight: bold;
                         font-size: 2rem;
                         text-align: center;
                         color: hsl(0, 0%, 84%);
                     }
                     .token-input-wrapper {
-                        margin-top: 2rem;
+                        margin-top: 1rem;
                         display: flex;
                         flex-direction: column;
                         justify-content: center;
                     }
                     .token-input-wrapper input {
-                        border-radius: 0.4rem;
-                        padding: 0.5rem 1rem;
-                        font-size: 1.5rem;
-                        width: 100%;
-                        max-width: 20rem;
+                        max-width: 35rem;
+                        height: 3rem;
+                        border-radius: 0.3rem;
+                        padding: 0.4rem 1rem;
+                        flex: 1;
+                        background-color: var(--input-background);
+                        color: var(--highlighted-font-color);
+                        font-weight: 500;
+                        box-shadow: var(--inside-box-shadow);
+                    }
+                    .token-input-wrapper input::placeholder {
+                        color: var(--font-color);
+                        font-weight: 400;
                     }
                     .confirm-config {
                         display: flex;
                         flex-wrap: wrap;
                         justify-content: space-between;
                         align-items: center;
-                        margin-top: 2rem;
+                        padding: 1rem;
+                        background-color: var(
+                            --complementary-background-color-2
+                        );
                     }
                     .how-to {
                         display: flex;
                         align-items: center;
-                        min-width: 11rem;
                         flex: 1;
-                        margin-right: 2rem;
+                    }
+                    .how-to:hover {
+                        background-color: var(
+                            --hovered-button-background-color-2
+                        );
+                        padding: 0.5rem;
+                        border-radius: 0.3rem;
+                    }
+                    .how-to {
+                        flex: 1 1 50%;
+                    }
+                    .how-to svg {
+                        height: min-content;
+                        margin-right: 0.8rem;
+                        flex: 0 0 1.2rem;
                     }
                     .how-to p {
+                        flex: 1 0 12.5rem;
+                        display: inline-block;
                         font-size: 1.5rem;
-                        color: hsl(0, 0%, 84%);
+                        color: var(--highlighted-font-color);
                         cursor: pointer;
+                        position: relative;
                     }
-                    .how-to p::after {
-                        content: url("/icons/arrow.svg");
-                        margin-left: 0.5rem;
-                    }
-                    .confirm-config .buttons {
+                    .buttons {
                         justify-content: flex-end;
                         display: flex;
                         flex: 1;
                     }
-                    .confirm-config button {
-                        padding: 0.5rem 1rem;
-                        border-radius: 0.4rem;
-                        font-size: 1.5rem;
+                    .buttons button {
+                        height: 3rem;
+                        border-radius: 0.3rem;
+                        padding: 0rem 1rem;
+                        font-size: 1.8rem;
                         font-weight: 500;
-                        text-transform: uppercase;
-                        text-align: center;
+                        color: white;
                         cursor: pointer;
-                        width: 7rem;
-                    }
-                    .close-button {
-                        margin-right: 2rem;
+                        transition: background 0.2s ease;
+                        margin-left: 1rem;
                     }
                     .close-button button {
-                        color: hsl(0, 0%, 20%);
-                        background-color: hsl(0, 0%, 84%);
-                        transition: 0.4s ease;
+                        font-weight: 400;
+                        background-color: transparent;
+                        transition: 0.2s ease;
+                        border: 0.1rem solid var(--button-2-border-color);
                     }
                     .close-button button:hover {
-                        color: hsl(0, 0%, 10%);
-                        background-color: hsl(0, 0%, 64%);
+                        background-color: var(
+                            --hovered-button-background-color-2
+                        );
                     }
                     .save-button button {
-                        background-color: hsl(193, 57%, 54%);
-                        color: hsl(193, 100%, 10%);
-                        transition: 0.4s ease;
+                        background-color: var(--button-background-color);
+                        box-shadow: var(--outside-box-shadow);
+                        transition: 0.2s ease;
                     }
                     .save-button button:hover {
-                        background-color: hsl(193, 57%, 40%);
-                        color: hsl(193, 100%, 0%);
+                        background-color: var(--hovered-buton-background-color);
                     }
                     .instructions {
-                        margin-top: 2rem;
                         grid-column: 1 / 3;
                     }
-                    @media only screen and (max-width: 412px) {
+                    @media only screen and (max-width: 382px) {
                         .how-to {
                             order: 1;
-                            margin-right: initial;
-                            margin-top: 2rem;
-                            display: flex;
                             justify-content: center;
+                            margin-top: 1rem;
                         }
-                        .confirm-config .buttons {
-                            order: 0;
+                        .how-to p {
+                            flex: initial;
+                        }
+                        .confirm-config {
+                            flex-direction: column;
+                        }
+                        .buttons {
+                            width: 100%;
                             justify-content: space-between;
                         }
-                        .instructions {
-                            margin-top: 1rem;
+                        .buttons button {
+                            margin-left: initial;
                         }
                     }
                 `}
@@ -245,6 +280,15 @@ export default function Modal({ setModal, setSavedToken }) {
                         margin-top: 1rem;
                         font-size: 1.2rem;
                         color: hsl(0, 80%, 60%);
+                    }
+                `}
+            </style>
+            <style jsx>
+                {`
+                    .how-to svg {
+                        transform: ${accordion
+                            ? "rotate(90deg)"
+                            : "rotate(360deg)"};
                     }
                 `}
             </style>
