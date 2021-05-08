@@ -6,6 +6,7 @@ export default function Modal({ setModal, setSavedToken }) {
     const [accordion, setAccordion] = useState(false);
     const [validity, setValidity] = useState(true);
     const inputRef = useRef();
+    const instructionsRef = useRef();
 
     function checkToken(token) {
         if (token.length === 156) {
@@ -87,11 +88,9 @@ export default function Modal({ setModal, setSavedToken }) {
                         </svg>
                         <p
                             tabIndex="0"
-                            onKeyPress={({ key }) =>
-                                key === "Enter"
-                                    ? setAccordion(!accordion)
-                                    : null
-                            }
+                            onKeyPress={({ key }) => {
+                                if (key === "Enter") setAccordion(!accordion);
+                            }}
                         >
                             How to get your Notion token?
                         </p>
@@ -117,7 +116,10 @@ export default function Modal({ setModal, setSavedToken }) {
                         </div>
                     </div>
                 </div>
-                <div className="instructions">
+                <div
+                    ref={instructionsRef}
+                    className={`instructions ${accordion ? "unfold" : "fold"}`}
+                >
                     <TokenInstructions />
                 </div>
             </article>
@@ -167,6 +169,9 @@ export default function Modal({ setModal, setSavedToken }) {
                         color: var(--font-color);
                         font-weight: 400;
                     }
+                    .token-input-wrapper input:focus {
+                        box-shadow: var(--input-focus-highlight);
+                    }
                     .confirm-config {
                         display: flex;
                         flex-wrap: wrap;
@@ -180,7 +185,8 @@ export default function Modal({ setModal, setSavedToken }) {
                     .how-to {
                         display: flex;
                         align-items: center;
-                        flex: 1;
+                        flex: 1 1 50%;
+                        transition: 0.2s ease;
                     }
                     .how-to:hover {
                         background-color: var(
@@ -189,13 +195,12 @@ export default function Modal({ setModal, setSavedToken }) {
                         padding: 0.5rem;
                         border-radius: 0.3rem;
                     }
-                    .how-to {
-                        flex: 1 1 50%;
-                    }
                     .how-to svg {
+                        margin-top: 0.3rem;
                         height: min-content;
                         margin-right: 0.8rem;
                         flex: 0 0 1.2rem;
+                        transition: 0.4s ease;
                     }
                     .how-to p {
                         flex: 1 0 12.5rem;
@@ -240,9 +245,6 @@ export default function Modal({ setModal, setSavedToken }) {
                     .save-button button:hover {
                         background-color: var(--hovered-buton-background-color);
                     }
-                    .instructions {
-                        grid-column: 1 / 3;
-                    }
                     @media only screen and (max-width: 382px) {
                         .how-to {
                             order: 1;
@@ -268,7 +270,29 @@ export default function Modal({ setModal, setSavedToken }) {
             <style jsx>
                 {`
                     .instructions {
-                        display: ${accordion ? "block" : "none"};
+                        max-height: 0;
+                    }
+                    .instructions.unfold {
+                        animation: 1s ease forwards unfold;
+                    }
+                    .instructions.fold {
+                        animation: 1s ease forwards fold;
+                    }
+                    @keyframes unfold {
+                        from {
+                            max-height: 0;
+                        }
+                        to {
+                            max-height: 20rem;
+                        }
+                    }
+                    @keyframes fold {
+                        from {
+                            max-height: 20rem;
+                        }
+                        to {
+                            max-height: 0;
+                        }
                     }
                 `}
             </style>
@@ -279,7 +303,7 @@ export default function Modal({ setModal, setSavedToken }) {
                         text-align: center;
                         margin-top: 1rem;
                         font-size: 1.2rem;
-                        color: hsl(0, 80%, 60%);
+                        color: var(--error-color);
                     }
                 `}
             </style>
@@ -287,8 +311,8 @@ export default function Modal({ setModal, setSavedToken }) {
                 {`
                     .how-to svg {
                         transform: ${accordion
-                            ? "rotate(90deg)"
-                            : "rotate(360deg)"};
+                            ? "rotateZ(90deg)"
+                            : "rotateZ(0deg)"};
                     }
                 `}
             </style>
