@@ -1,4 +1,3 @@
-import SigninContextProvider from "../contexts/SigninContext";
 import GlobalStyles from "../components/GlobalStyles";
 import TextInput from "../components/login/TextInput";
 
@@ -11,13 +10,11 @@ export default function SignIn() {
                         <h1>
                             Got your token? Great.
                             <br />
-                            Paste it below to sign in:
+                            Paste it below to log in:
                         </h1>
                     </div>
                     <div className="token-wrapper">
-                        <SigninContextProvider>
                             <TextInput />
-                        </SigninContextProvider>
                     </div>
                 </div>
             </main>

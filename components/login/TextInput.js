@@ -1,15 +1,37 @@
-import { useRef, useContext } from "react";
+import { useState } from "react";
+import { useRouter } from "next/router";
+import firestore from "../../utils/firestore";
 import SubmitButton from "./SubmitButton";
-import { SigninContext } from "../../contexts/SigninContext";
 
 export default function SigninInput() {
-    const { checkIfTokenExists, tokenValidity } = useContext(SigninContext);
-    const inputRef = useRef();
+    const [token, setToken] = useState("");
+    const [tokenValidity, setTokenValidity] = useState(true);
+    const router = useRouter();
+
+    async function checkIfTokenIsValid(token) {
+        const collection = await firestore
+            .connect()
+            .collection("authorizations")
+            .get();
+
+        collection.forEach((doc) => {
+            if (doc.get("token") === token) {
+                localStorage.setItem("email", doc.get("email"));
+
+                setTokenValidity(true);
+
+                router.push("/app");
+
+                return;
+            } else {
+                setTokenValidity(false);
+                return;
+            }
+        });
+    }
 
     function onKeyPress(key) {
-        return key === "Enter"
-            ? checkIfTokenExists(inputRef.current.value)
-            : null;
+        return key === "Enter" ? checkIfTokenIsValid(token) : null;
     }
 
     return (
@@ -18,13 +40,19 @@ export default function SigninInput() {
                 <input
                     type="text"
                     placeholder="Place your token here"
+                    value={token}
+                    onChange={({ target }) => setToken(target.value)}
                     onKeyPress={({ key }) => onKeyPress(key)}
-                    ref={inputRef}
-                    required
                 />
                 <span className="token-validity">Invalid token</span>
             </div>
-            <SubmitButton inputRef={inputRef} />
+            <div className="button-wrapper">
+                <SubmitButton
+                    text="Log in"
+                    token={token}
+                    checkIfTokenIsValid={checkIfTokenIsValid}
+                />
+            </div>
             <style jsx>
                 {`
                     .input-wrapper input {

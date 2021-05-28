@@ -1,8 +1,6 @@
 import GlobalStyles from "../components/GlobalStyles";
 import TextInput from "../components/index/TextInput";
 import VideoAndEmailWrapper from "../components/index/VideoAndEmailWrapper";
-import EmailContextProvider from "../contexts/EmailContext";
-import video from "./video.mp4";
 
 export default function Home() {
     return (
@@ -19,7 +17,7 @@ export default function Home() {
                     <VideoAndEmailWrapper>
                         <div className="video-wrapper">
                             <video
-                                src={video}
+                                src={"/video/serviceShowcase.mp4"}
                                 playsInline
                                 autoPlay
                                 muted
@@ -27,9 +25,7 @@ export default function Home() {
                             />
                         </div>
                         <div className="email-input-wrapper">
-                            <EmailContextProvider>
-                                <TextInput />
-                            </EmailContextProvider>
+                            <TextInput />
                         </div>
                     </VideoAndEmailWrapper>
                 </div>
@@ -61,7 +57,9 @@ export default function Home() {
                         justify-content: center;
                         flex-wrap: wrap;
                         padding: 1rem;
-                        background-color: var(--complementary-background-color-2);
+                        background-color: var(
+                            --complementary-background-color-2
+                        );
                     }
                 `}
             </style>
