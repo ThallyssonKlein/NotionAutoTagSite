@@ -27,7 +27,9 @@ export default function App() {
                         aria-hidden="true"
                     >
                         <Modal
-                            setModal={setModal}
+                            modalValue={modal}
+                            setModalValue={setModal}
+                            savedTokenValue={savedToken}
                             setSavedToken={setSavedToken}
                         />
                     </div>

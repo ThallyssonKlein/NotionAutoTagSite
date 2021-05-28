@@ -1,12 +1,14 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import TokenInstructions from "./TokenInstructions";
 import firestore from "../../utils/firestore";
+import ConfirmButton from "../shared/Buttons/ConfirmButton";
+import CancelButton from "../shared/Buttons/CancelButton";
+import ErrorMessage from "./ErrorMessage";
 
-export default function Modal({ setModal, setSavedToken }) {
+export default function Modal({ modalValue, setModalValue, setSavedToken }) {
     const [accordion, setAccordion] = useState(false);
-    const [validity, setValidity] = useState(true);
-    const inputRef = useRef();
-    const instructionsRef = useRef();
+    const [tokenValidity, setTokenValidity] = useState(true);
+    const [inputToken, setInputToken] = useState("");
 
     function checkToken(token) {
         if (token.length === 156) {
@@ -15,19 +17,27 @@ export default function Modal({ setModal, setSavedToken }) {
     }
 
     async function saveToken(token) {
+        // check if token is valid
         if (!checkToken(token)) {
-            return setValidity(false);
+            return setTokenValidity(false);
         }
 
-        const collection = await firestore.connect
+        const collection = await firestore.connect()
             .collection("authorizations")
             .get();
 
         collection.forEach(async (doc) => {
+            // if token already registered, show error message
+            if (doc.get("token_v2") === inputToken) {
+                setTokenValidity(false);
+                return;
+            }
+
+            // if database contains the user email, then save the token based on user email
             if (doc.get("email")) {
-                setValidity(true);
+                setTokenValidity(true);
                 const leadData = doc.data();
-                const leadCollection = firestore.connect
+                const leadCollection = firestore.connect()
                     .collection("authorizations")
                     .doc(doc.ref.id);
 
@@ -36,10 +46,11 @@ export default function Modal({ setModal, setSavedToken }) {
                     token_v2: token,
                 });
 
-                setSavedToken(true);
+                setSavedToken(!setSavedToken);
                 setTimeout(() => setSavedToken(false), 2000);
             } else {
-                return console.log("There was an error");
+                console.log("There was an error");
+                return;
             }
         });
     }
@@ -58,14 +69,17 @@ export default function Modal({ setModal, setSavedToken }) {
                         <input
                             type="text"
                             placeholder="Paste your token here"
-                            ref={inputRef}
+                            value={inputToken}
+                            onChange={({ target }) =>
+                                setInputToken(target.value)
+                            }
                             onKeyPress={({ key }) =>
-                                key === "Enter"
-                                    ? saveToken(inputRef.current.value)
-                                    : null
+                                key === "Enter" ? saveToken(inputToken) : null
                             }
                         />
-                        <span>Invalid token. Check if it has no spaces.</span>
+                        {!tokenValidity && (
+                            <ErrorMessage text="Invalid token. Check if it has no spaces." />
+                        )}
                     </div>
                 </div>
                 <div className="confirm-config">
@@ -97,27 +111,21 @@ export default function Modal({ setModal, setSavedToken }) {
                     </div>
                     <div className="buttons">
                         <div className="close-button">
-                            <button
-                                type="button"
-                                onClick={() => setModal(false)}
-                            >
-                                Close
-                            </button>
+                            <CancelButton
+                                value={modalValue}
+                                setValue={setModalValue}
+                            />
                         </div>
                         <div className="save-button">
-                            <button
-                                type="button"
-                                onClick={() =>
-                                    saveToken(inputRef.current.value)
-                                }
-                            >
-                                Save
-                            </button>
+                            <ConfirmButton
+                                text="Save"
+                                value={inputToken}
+                                setValue={saveToken}
+                            />
                         </div>
                     </div>
                 </div>
                 <div
-                    ref={instructionsRef}
                     className={`instructions ${accordion ? "unfold" : "fold"}`}
                 >
                     <TokenInstructions />
@@ -214,36 +222,7 @@ export default function Modal({ setModal, setSavedToken }) {
                         justify-content: flex-end;
                         display: flex;
                         flex: 1;
-                    }
-                    .buttons button {
-                        height: 3rem;
-                        border-radius: 0.3rem;
-                        padding: 0rem 1rem;
-                        font-size: 1.8rem;
-                        font-weight: 500;
-                        color: white;
-                        cursor: pointer;
-                        transition: background 0.2s ease;
-                        margin-left: 1rem;
-                    }
-                    .close-button button {
-                        font-weight: 400;
-                        background-color: transparent;
-                        transition: 0.2s ease;
-                        border: 0.1rem solid var(--button-2-border-color);
-                    }
-                    .close-button button:hover {
-                        background-color: var(
-                            --hovered-button-background-color-2
-                        );
-                    }
-                    .save-button button {
-                        background-color: var(--button-background-color);
-                        box-shadow: var(--outside-box-shadow);
-                        transition: 0.2s ease;
-                    }
-                    .save-button button:hover {
-                        background-color: var(--hovered-buton-background-color);
+                        column-gap: 1rem;
                     }
                     @media only screen and (max-width: 382px) {
                         .how-to {
@@ -261,14 +240,7 @@ export default function Modal({ setModal, setSavedToken }) {
                             width: 100%;
                             justify-content: space-between;
                         }
-                        .buttons button {
-                            margin-left: initial;
-                        }
                     }
-                `}
-            </style>
-            <style jsx>
-                {`
                     .instructions {
                         max-height: 0;
                     }
@@ -293,17 +265,6 @@ export default function Modal({ setModal, setSavedToken }) {
                         to {
                             max-height: 0;
                         }
-                    }
-                `}
-            </style>
-            <style jsx>
-                {`
-                    .token-input-wrapper span {
-                        display: ${validity ? "none" : "block"};
-                        text-align: center;
-                        margin-top: 1rem;
-                        font-size: 1.2rem;
-                        color: var(--error-color);
                     }
                 `}
             </style>
