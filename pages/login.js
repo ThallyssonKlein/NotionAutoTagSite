@@ -14,7 +14,7 @@ export default function SignIn() {
                         </h1>
                     </div>
                     <div className="token-wrapper">
-                            <TextInput />
+                        <TextInput />
                     </div>
                 </div>
             </main>
@@ -22,13 +22,17 @@ export default function SignIn() {
                 {`
                     main {
                         padding: 2rem;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: 100%;
                     }
                     .content {
                         display: grid;
                         grid-template: repeat(3, min-content) / 1fr;
 
                         box-shadow: var(--outside-box-shadow);
-                        border-radius: 0.3rem;
+                        border-radius: var(--border-radius);
                         overflow: hidden;
                     }
                     .main-text-wrapper {
@@ -43,7 +47,7 @@ export default function SignIn() {
                         display: flex;
                         justify-content: center;
                         flex-wrap: wrap;
-
+                        gap: 1rem;
                         background-color: var(
                             --complementary-background-color-2
                         );

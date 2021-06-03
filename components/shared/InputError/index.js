@@ -1,14 +1,11 @@
-export default function ErrorMessage({ text }) {
+export default function InputError({ text }) {
     return (
         <>
             <span>{text}</span>
             <style jsx>{`
                 span {
-                    display: block;
-                    text-align: center;
-                    margin-top: 1rem;
-                    font-size: 1.2rem;
                     color: var(--error-color);
+                    font-size: clamp(1.1rem, 0.5vw, 1.5rem);
                 }
             `}</style>
         </>

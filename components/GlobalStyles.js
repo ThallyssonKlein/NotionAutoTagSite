@@ -21,6 +21,8 @@ export default function GlobalStyles({ children }) {
                         --highlighted-font-color: #ffffffe6;
                         --font-color: #ffffff99;
 
+                        --content-text-font-size: clamp(1.5rem, 1vw, 2.5rem);
+
                         --button-background-color: #2eaadc;
                         --hovered-buton-background-color: #069cff;
 
@@ -45,14 +47,18 @@ export default function GlobalStyles({ children }) {
 
                         --anchor-color: #2eaadc;
                         --hovered-anchor-color: #3094b0;
+
+                        --border-radius: 0.3rem;
                     }
                     label,
                     h1,
+                    h2,
                     input,
                     button,
                     p,
                     li,
-                    span {
+                    span,
+                    a {
                         font-family: -apple-system, BlinkMacSystemFont,
                             "Segoe UI", Helvetica, "Apple Color Emoji", Arial,
                             sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
@@ -77,12 +83,9 @@ export default function GlobalStyles({ children }) {
                     input[type="email"] {
                         outline: none;
                     }
-                    main {
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        height: 100vh;
+                    #__next {
                         width: 100vw;
+                        height: 100vh;
                         background-color: var(--background-color);
                     }
                 `}

@@ -7,9 +7,9 @@ export default function CancelButton({ value, setValue }) {
             <style jsx>{`
                 button {
                     height: 3rem;
-                    border-radius: 0.3rem;
+                    border-radius: var(--border-radius);
                     padding: 0rem 1rem;
-                    font-size: 1.8rem;
+                    font-size: var(--content-text-font-size);
                     color: white;
                     cursor: pointer;
                     transition: background 0.2s ease;
