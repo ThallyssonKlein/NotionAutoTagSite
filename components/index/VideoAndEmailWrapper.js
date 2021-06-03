@@ -6,7 +6,7 @@ export default function VideoAndEmailWrapper({ children }) {
                 {`
                     .wrapper {
                         box-shadow: var(--outside-box-shadow);
-                        border-radius: 0.3rem;
+                        border-radius: var(--border-radius);
                         overflow: hidden;
                     }
                 `}

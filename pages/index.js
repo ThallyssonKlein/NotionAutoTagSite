@@ -32,13 +32,19 @@ export default function Home() {
             </main>
             <style jsx>
                 {`
+                    main {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: 100%;
+                        padding: 2rem;
+                    }
                     .content {
                         display: grid;
                         grid-template: repeat(3, min-content) / 1fr;
                         gap: 2rem;
                         max-width: 80rem;
                         margin: 0 auto;
-                        padding: 2rem;
                     }
                     .main-text-wrapper h1 {
                         color: white;
@@ -50,11 +56,12 @@ export default function Home() {
                     }
                     .video-wrapper video {
                         width: 100%;
-                        border-radius: 0.4rem;
+                        border-radius: var(--border-radius);
                     }
                     .email-input-wrapper {
                         display: flex;
                         justify-content: center;
+                        gap: 1rem;
                         flex-wrap: wrap;
                         padding: 1rem;
                         background-color: var(
