@@ -60,7 +60,10 @@ export default function SigninInput() {
             </div>
             <style jsx>{`
                 .input-container {
-                    width: min(100%, 20rem); // make sure the container has the same width of the input container
+                    width: min(
+                        100%,
+                        20rem
+                    ); // make sure the container has the same width of the input container
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
