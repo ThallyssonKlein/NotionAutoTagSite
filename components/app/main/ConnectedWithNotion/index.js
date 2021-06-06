@@ -1,17 +1,38 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Input from "../../../shared/Input";
 import ConfirmButton from "../../../shared/Buttons/ConfirmButton";
 import InputError from "../../../shared/InputError";
+import firestore from "../../../../utils/firestore";
 
 export default function ConnectedWithNotion() {
     const [link, setLink] = useState("");
     const [tables, setTables] = useState([]);
     const [emptyInputError, setEmptyInputError] = useState(false);
 
+    const db = firestore.connect();
+    const email = document.cookie.substring(6);
+
+    async function getPreviouslyAddedTables() {}
+
+    async function saveDatabaseAndViewId(databaseId, viewId) {
+        const documents = await db.collection("authorizations").get();
+
+        documents.forEach(async (doc) => {
+            if (doc.get("email") === email) {
+                const documentId = doc.id;
+
+                db.collection("authorizations")
+                    .doc(documentId)
+                    .update({ collections_id: [databaseId] });
+            }
+        });
+    }
+
     function extractDatabaseAndViewId() {
         const path = link.split("/")[3];
         const [databaseId, viewId] = path.split("?v=");
         setLink("");
+        saveDatabaseAndViewId(databaseId, viewId);
     }
 
     function addTableToList() {
@@ -25,13 +46,7 @@ export default function ConnectedWithNotion() {
         extractDatabaseAndViewId();
     }
 
-    async function getDatabaseInfo() {
-        const database = await (
-            await fetch(`https://api.notion.com/v1/databases/${link}`, {
-                method: "GET",
-            })
-        ).json();
-    }
+    useEffect(getPreviouslyAddedTables, []);
 
     return (
         <>
@@ -45,7 +60,7 @@ export default function ConnectedWithNotion() {
                             type="text"
                             value={link}
                             setValue={setLink}
-                            placeholder="Paste the link of your table here"
+                            placeholder="Paste your database link here"
                         />
                         <div className="empty-input-error">
                             {emptyInputError && (
