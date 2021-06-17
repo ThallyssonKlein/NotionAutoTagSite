@@ -22,7 +22,7 @@ export default function Input({
             />
             <style jsx>{`
                 input {
-                    width: min(100%, 20rem);
+                    width: 100%;
                     height: 3rem;
                     background-color: var(--input-background);
                     box-shadow: var(--inside-box-shadow);

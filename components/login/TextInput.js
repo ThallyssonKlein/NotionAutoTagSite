@@ -65,9 +65,7 @@ export default function SigninInput() {
                         20rem
                     ); // make sure the container has the same width of the input container
                     display: flex;
-                    flex-direction: column;
                     justify-content: center;
-                    row-gap: 0.5rem;
                     text-align: center;
                 }
             `}</style>

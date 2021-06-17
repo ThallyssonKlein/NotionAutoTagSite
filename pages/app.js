@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import ConnectWithNotion from "../components/app/main/CallToAction";
 import Header from "../components/app/header";
 import GlobalStyles from "../components/GlobalStyles";
@@ -6,22 +5,12 @@ import firestore from "../utils/firestore";
 import ConnectedWithNotion from "../components/app/main/ConnectedWithNotion";
 
 export default function App({ connected }) {
-    const [connectedWithNotion, setConnectedWithNotion] = useState(false);
-
-    useEffect(
-        () =>
-            connected
-                ? setConnectedWithNotion(true)
-                : setConnectedWithNotion(false),
-        [connected]
-    );
-
     return (
         <GlobalStyles>
             <div className="container">
                 <Header />
                 <main>
-                    {connectedWithNotion ? (
+                    {connected ? (
                         <ConnectedWithNotion />
                     ) : (
                         <ConnectWithNotion />

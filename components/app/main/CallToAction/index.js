@@ -36,7 +36,7 @@ export default function ConnectWithNotion() {
                     width: 100%;
                     display: flex;
                     padding: 1rem;
-                    background-color: var(--button-background-color);
+                    background-color: var(--confirm-button-background-color);
                     border-radius: var(--border-radius);
                     box-shadow: var(--outside-box-shadow),
                         var(--inside-box-shadow);
@@ -47,7 +47,7 @@ export default function ConnectWithNotion() {
                     font-weight: bold;
                 }
                 .call-to-action a:hover {
-                    background-color: var(--hovered-buton-background-color);
+                    background-color: var(--hovered-confirm-button-background-color);
                 }
             `}</style>
         </>
