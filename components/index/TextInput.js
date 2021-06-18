@@ -8,7 +8,7 @@ export default function TextInput() {
     const [email, setEmail] = useState("");
     const [emptyInputError, setEmptyInputError] = useState(false);
 
-    async function Submit(email) {
+    async function submit() {
         const { created } = await firestore.createDocument("users", null, {
             email,
         });
@@ -23,22 +23,16 @@ export default function TextInput() {
         });
     }
 
-    function validateEmail(email) {
+    function validateEmail() {
         const re =
             /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(email).toLowerCase());
-    }
+        const emailValidity = re.test(String(email).toLowerCase());
 
-    function ValidateAndSubmit(email) {
-        if (validateEmail(email)) {
-            Submit(email);
-        } else {
-            setEmptyInputError(true);
-        }
+        return emailValidity ? submit() : setEmptyInputError(true);
     }
 
     function onKeyPress({ key }) {
-        return key === "Enter" ? ValidateAndSubmit(email) : null;
+        return key === "Enter" ? validateEmail() : null;
     }
 
     return (
@@ -61,7 +55,7 @@ export default function TextInput() {
                 <ConfirmButton
                     text="Submit"
                     value={email}
-                    setValue={ValidateAndSubmit}
+                    setValue={validateEmail}
                 />
             </dv>
             <style jsx>{`
@@ -70,7 +64,10 @@ export default function TextInput() {
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
-                    row-gap: 0.5rem;
+                    width: min(
+                        100%,
+                        34rem
+                    ); // 34rem is the width of the input placeholder
                 }
             `}</style>
         </>
