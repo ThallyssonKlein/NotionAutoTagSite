@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import firestore from "../../utils/firestore";
-import SubmitButton from "./SubmitButton";
+import Input from "../shared/Input";
+import InputError from "../shared/InputError";
+import ConfirmButton from "../shared/Buttons/ConfirmButton";
 
 export default function SigninInput() {
     const [token, setToken] = useState("");
-    const [tokenValidity, setTokenValidity] = useState(true);
+    const [emptyInputError, setEmptyInputError] = useState(false);
     const router = useRouter();
 
     async function checkIfTokenIsValid(token) {
@@ -16,79 +18,57 @@ export default function SigninInput() {
 
         collection.forEach((doc) => {
             if (doc.get("token") === token) {
-                localStorage.setItem("email", doc.get("email"));
+                document.cookie = `email=${doc.get("email")}`;
 
-                setTokenValidity(true);
+                setEmptyInputError(false);
 
                 router.push("/app");
 
                 return;
-            } else {
-                setTokenValidity(false);
-                return;
             }
+
+            setEmptyInputError(true);
+            return;
         });
     }
 
-    function onKeyPress(key) {
+    function onKeyPress({ key }) {
         return key === "Enter" ? checkIfTokenIsValid(token) : null;
     }
 
     return (
         <>
-            <div className="input-wrapper">
-                <input
-                    type="text"
-                    placeholder="Place your token here"
+            <div className="input-container">
+                <Input
                     value={token}
-                    onChange={({ target }) => setToken(target.value)}
-                    onKeyPress={({ key }) => onKeyPress(key)}
+                    setValue={setToken}
+                    onKeyPress={onKeyPress}
+                    placeholder="Place your token here"
                 />
-                <span className="token-validity">Invalid token</span>
+                <div className="empty-input-error">
+                    {emptyInputError && (
+                        <InputError text="Your token is invalid. Make sure you typed it correctly." />
+                    )}
+                </div>
             </div>
-            <div className="button-wrapper">
-                <SubmitButton
+            <div>
+                <ConfirmButton
                     text="Log in"
-                    token={token}
-                    checkIfTokenIsValid={checkIfTokenIsValid}
+                    value={token}
+                    setValue={checkIfTokenIsValid}
                 />
             </div>
-            <style jsx>
-                {`
-                    .input-wrapper input {
-                        max-width: 35rem;
-                        height: 3rem;
-                        border-radius: 0.3rem;
-                        padding: 0.4rem 1rem;
-                        flex: 1;
-                        background-color: var(--input-background);
-                        color: var(--highlighted-font-color);
-                        font-weight: 500;
-                        box-shadow: var(--inside-box-shadow);
-                    }
-                    .input-wrapper input::placeholder {
-                        color: var(--font-color);
-                        font-weight: 400;
-                    }
-                    .input-wrapper input:focus {
-                        box-shadow: var(--input-focus-highlight);
-                    }
-                    .token-validity {
-                        margin-top: 0.5rem;
-                        text-align: center;
-                        font-size: 1.2rem;
-                        font-weight: bold;
-                        color: var(--error-color);
-                    }
-                `}
-            </style>
-            <style jsx>
-                {`
-                    .token-validity {
-                        display: ${tokenValidity ? "none" : "block"};
-                    }
-                `}
-            </style>
+            <style jsx>{`
+                .input-container {
+                    width: min(
+                        100%,
+                        20rem
+                    ); // make sure the container has the same width of the input container
+                    display: flex;
+                    justify-content: center;
+                    text-align: center;
+                }
+            `}</style>
         </>
     );
 }
