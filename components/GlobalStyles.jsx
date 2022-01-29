@@ -1,9 +1,11 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/react-in-jsx-scope */
 export default function GlobalStyles({ children }) {
-    return (
-        <>
-            {children}
-            <style jsx global>
-                {`
+  return (
+    <>
+      {children}
+      <style jsx global>
+        {`
                     * {
                         padding: 0;
                         margin: 0;
@@ -91,7 +93,7 @@ export default function GlobalStyles({ children }) {
                         background-color: var(--background-color);
                     }
                 `}
-            </style>
-        </>
-    );
+      </style>
+    </>
+  );
 }
