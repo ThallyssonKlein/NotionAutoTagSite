@@ -1,5 +1,13 @@
 /* eslint-disable react/react-in-jsx-scope */
 export default function ConnectWithNotion() {
+  let parameters;
+
+  if (process.env.NODE_ENV == 'development') {
+    parameters = `client_id=${process.env.NEXT_PUBLIC_CLIENT_ID_DEV}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI_DEV}&response_type=code`;
+  } else {
+    parameters = `client_id=${process.env.NEXT_PUBLIC_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI}&response_type=code`;
+  }
+
   return (
     <>
       <div className="container">
@@ -11,7 +19,7 @@ export default function ConnectWithNotion() {
         </div>
         <div className="call-to-action">
           <a
-            href={`https://api.notion.com/v1/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_CLIENT_ID_DEV}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI_DEV}&response_type=code`}
+            href={`https://api.notion.com/v1/oauth/authorize?${parameters}`}
           >
             Connect with Notion
           </a>

@@ -54,12 +54,20 @@ export async function getServerSideProps(context) {
     const body = JSON.stringify({
       grant_type: 'authorization_code',
       code: authorizationCode,
-      redirect_uri: process.env.NEXT_PUBLIC_REDIRECT_URI_DEV,
+      redirect_uri: (process.env.NODE_ENV === 'development') ? process.env.NEXT_PUBLIC_REDIRECT_URI_DEV : process.env.NEXT_PUBLIC_REDIRECT_URI,
     });
 
-    const auth = Buffer.from(
-      `${process.env.NEXT_PUBLIC_CLIENT_ID_DEV}:${process.env.NEXT_PUBLIC_SECRET_DEV}`,
-    ).toString('base64');
+    let auth;
+
+    if (process.env.NODE_ENV === 'development') {
+      Buffer.from(
+        `${process.env.NEXT_PUBLIC_CLIENT_ID_DEV}:${process.env.NEXT_PUBLIC_SECRET_DEV}`,
+      ).toString('base64');
+    } else {
+      Buffer.from(
+        `${process.env.NEXT_PUBLIC_CLIENT_ID}:${process.env.NEXT_PUBLIC_SECRET}`,
+      ).toString('base64');
+    }
 
     const { access_token } = await (
       await fetch('https://api.notion.com/v1/oauth/token', {
