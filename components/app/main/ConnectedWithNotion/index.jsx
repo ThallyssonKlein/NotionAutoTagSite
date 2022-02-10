@@ -159,6 +159,7 @@ export default function ConnectedWithNotion() {
               <ul className="tables">
                 {tables
                                     && tables.map((table, index) => (
+                                      // eslint-disable-next-line react/no-array-index-key
                                       <li className="table" key={index}>
                                         <p>
                                           Table:
