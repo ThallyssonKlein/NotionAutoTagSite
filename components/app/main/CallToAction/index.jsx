@@ -8,6 +8,8 @@ export default function ConnectWithNotion() {
     parameters = `client_id=${process.env.NEXT_PUBLIC_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URI}&response_type=code`;
   }
 
+  alert(parameters);
+
   return (
     <>
       <div className="container">
