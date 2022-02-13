@@ -19,19 +19,19 @@ export default function SigninInput() {
       .collection('authorizations')
       .get();
 
+    let foundDocument = false;
     collection.forEach((doc) => {
       if (doc.get('token') === token) {
         document.cookie = `email=${doc.get('email')}`;
-
-        setEmptyInputError(false);
-
-        router.push('/app');
-
-        return;
+        foundDocument = true;
       }
-
-      setEmptyInputError(true);
     });
+
+    if (!foundDocument) {
+      setEmptyInputError(true);
+    } else {
+      router.push('/app');
+    }
   }
 
   function onKeyPress({ key }) {

@@ -81,6 +81,9 @@ export async function getServerSideProps(context) {
     ).json();
 
     const { email } = context.req.cookies;
+
+    console.log(email);
+
     const documents = await firestore
       .connect()
       .collection('authorizations')
