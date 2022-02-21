@@ -1,7 +1,7 @@
 /* eslint-disable react/react-in-jsx-scope */
-import GlobalStyles from '../../components/GlobalStyles';
-import TextInput from './TextInput';
-import VideoAndEmailWrapper from './VideoAndEmailWrapper';
+import GlobalStyles from '../components/GlobalStyles';
+import TextInput from './index/TextInput';
+import VideoAndEmailWrapper from './index/VideoAndEmailWrapper';
 
 export default function Home() {
   return (
