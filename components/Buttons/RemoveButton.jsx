@@ -1,10 +1,13 @@
+/* eslint-disable react/react-in-jsx-scope */
+// eslint-disable-next-line react/prop-types
 export default function RemoveButton({ onClick }) {
-    return (
-        <>
-            <button type="button" onClick={onClick}>
-                Remove
-            </button>
-            <style jsx>{`
+  return (
+    <>
+      <button type="button" onClick={onClick}>
+        Remove
+      </button>
+      <style jsx>
+        {`
                 button {
                     user-select: none;
                     height: 3rem;
@@ -22,7 +25,9 @@ export default function RemoveButton({ onClick }) {
                         --hovered-remove-button-background-color
                     );
                 }
-            `}</style>
-        </>
-    );
+            `}
+
+      </style>
+    </>
+  );
 }

@@ -1,10 +1,16 @@
-export default function CancelButton({ type, text, value, setValue }) {
-    return (
-        <>
-            <button type={type ?? "button"} onClick={() => setValue(value)}>
-                {text}
-            </button>
-            <style jsx>{`
+/* eslint-disable react/button-has-type */
+/* eslint-disable react/react-in-jsx-scope */
+export default function CancelButton({
+  // eslint-disable-next-line react/prop-types
+  type, text, value, setValue,
+}) {
+  return (
+    <>
+      <button type={type ?? 'button'} onClick={() => setValue(value)}>
+        {text}
+      </button>
+      <style jsx>
+        {`
                 button {
                     user-select: none;
                     height: 3rem;
@@ -21,7 +27,9 @@ export default function CancelButton({ type, text, value, setValue }) {
                 button:hover {
                     background-color: var(--hovered-confirm-button-background-color);
                 }
-            `}</style>
-        </>
-    );
+            `}
+
+      </style>
+    </>
+  );
 }

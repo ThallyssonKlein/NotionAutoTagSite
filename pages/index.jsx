@@ -1,37 +1,38 @@
-import GlobalStyles from "../components/GlobalStyles";
-import TextInput from "../components/index/TextInput";
-import VideoAndEmailWrapper from "../components/index/VideoAndEmailWrapper";
+/* eslint-disable react/react-in-jsx-scope */
+import GlobalStyles from '../components/GlobalStyles';
+import TextInput from './index/TextInput';
+import VideoAndEmailWrapper from './index/VideoAndEmailWrapper';
 
 export default function Home() {
-    return (
-        <GlobalStyles>
-            <main>
-                <div className="content">
-                    <div className="main-text-wrapper">
-                        <h1>
-                            Imagine that your Notion collections create a life
-                            of their own and start to organize themselves, what
-                            do you think?
-                        </h1>
-                    </div>
-                    <VideoAndEmailWrapper>
-                        <div className="video-wrapper">
-                            <video
-                                src={"/video/serviceShowcase.mp4"}
-                                playsInline
-                                autoPlay
-                                muted
-                                loop
-                            />
-                        </div>
-                        <div className="email-input-wrapper">
-                            <TextInput />
-                        </div>
-                    </VideoAndEmailWrapper>
-                </div>
-            </main>
-            <style jsx>
-                {`
+  return (
+    <GlobalStyles>
+      <main>
+        <div className="content">
+          <div className="main-text-wrapper">
+            <h1>
+              Imagine that your Notion collections create a life
+              of their own and start to organize themselves, what
+              do you think?
+            </h1>
+          </div>
+          <VideoAndEmailWrapper>
+            <div className="video-wrapper">
+              <video
+                src="/video/serviceShowcase.mp4"
+                playsInline
+                autoPlay
+                muted
+                loop
+              />
+            </div>
+            <div className="email-input-wrapper">
+              <TextInput />
+            </div>
+          </VideoAndEmailWrapper>
+        </div>
+      </main>
+      <style jsx>
+        {`
                     main {
                         display: flex;
                         justify-content: center;
@@ -69,7 +70,7 @@ export default function Home() {
                         );
                     }
                 `}
-            </style>
-        </GlobalStyles>
-    );
+      </style>
+    </GlobalStyles>
+  );
 }

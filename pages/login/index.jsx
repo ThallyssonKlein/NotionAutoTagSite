@@ -1,25 +1,26 @@
-import GlobalStyles from "../components/GlobalStyles";
-import TextInput from "../components/login/TextInput";
+/* eslint-disable react/react-in-jsx-scope */
+import GlobalStyles from '../../components/GlobalStyles';
+import TextInput from './TextInput';
 
 export default function SignIn() {
-    return (
-        <GlobalStyles>
-            <main>
-                <div className="content">
-                    <div className="main-text-wrapper">
-                        <h1>
-                            Got your token? Great.
-                            <br />
-                            Paste it below to log in:
-                        </h1>
-                    </div>
-                    <div className="token-wrapper">
-                        <TextInput />
-                    </div>
-                </div>
-            </main>
-            <style jsx>
-                {`
+  return (
+    <GlobalStyles>
+      <main>
+        <div className="content">
+          <div className="main-text-wrapper">
+            <h1>
+              Got your token? Great.
+              <br />
+              Paste it below to log in:
+            </h1>
+          </div>
+          <div className="token-wrapper">
+            <TextInput />
+          </div>
+        </div>
+      </main>
+      <style jsx>
+        {`
                     main {
                         padding: 2rem;
                         display: flex;
@@ -54,7 +55,7 @@ export default function SignIn() {
                         padding: 1rem;
                     }
                 `}
-            </style>
-        </GlobalStyles>
-    );
+      </style>
+    </GlobalStyles>
+  );
 }

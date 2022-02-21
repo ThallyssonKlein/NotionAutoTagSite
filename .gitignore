@@ -1,6 +1,7 @@
 node_modules/
 .next/
-yarn.lock
 .env.local
 package-lock.json
 .env.local
+# Sentry
+.sentryclirc

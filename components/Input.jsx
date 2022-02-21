@@ -1,26 +1,29 @@
+/* eslint-disable react/prop-types */
+/* eslint-disable react/react-in-jsx-scope */
 export default function Input({
-    type,
-    id,
-    name,
-    value,
-    setValue,
-    onKeyPress,
-    placeholder,
-    required,
+  type,
+  id,
+  name,
+  value,
+  setValue,
+  onKeyPress,
+  placeholder,
+  required,
 }) {
-    return (
-        <>
-            <input
-                type={type ?? "text"}
-                id={id}
-                name={name}
-                value={value}
-                onChange={({ target }) => setValue(target.value)}
-                onKeyPress={onKeyPress}
-                placeholder={placeholder}
-                required={required}
-            />
-            <style jsx>{`
+  return (
+    <>
+      <input
+        type={type ?? 'text'}
+        id={id}
+        name={name}
+        value={value}
+        onChange={({ target }) => setValue(target.value)}
+        onKeyPress={onKeyPress}
+        placeholder={placeholder}
+        required={required}
+      />
+      <style jsx>
+        {`
                 input {
                     width: 100%;
                     height: 3rem;
@@ -38,7 +41,9 @@ export default function Input({
                 input:focus {
                     box-shadow: var(--input-focus-highlight);
                 }
-            `}</style>
-        </>
-    );
+            `}
+
+      </style>
+    </>
+  );
 }

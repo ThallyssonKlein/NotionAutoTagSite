@@ -1,10 +1,13 @@
+/* eslint-disable react/react-in-jsx-scope */
+// eslint-disable-next-line react/prop-types
 export default function CancelButton({ value, setValue }) {
-    return (
-        <>
-            <button type="button" onClick={() => setValue(!value)}>
-                Cancel
-            </button>
-            <style jsx>{`
+  return (
+    <>
+      <button type="button" onClick={() => setValue(!value)}>
+        Cancel
+      </button>
+      <style jsx>
+        {`
                 button {
                     user-select: none;
                     height: 3rem;
@@ -23,7 +26,9 @@ export default function CancelButton({ value, setValue }) {
                         --hovered-cancel-button-background-color
                     );
                 }
-            `}</style>
-        </>
-    );
+            `}
+
+      </style>
+    </>
+  );
 }
