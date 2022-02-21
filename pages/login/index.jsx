@@ -1,6 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
-import GlobalStyles from '../components/GlobalStyles';
-import TextInput from '../components/login/TextInput';
+import GlobalStyles from '../../components/GlobalStyles';
+import TextInput from './TextInput';
 
 export default function SignIn() {
   return (

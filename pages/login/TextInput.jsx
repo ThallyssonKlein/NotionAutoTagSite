@@ -3,9 +3,9 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import firestore from '../../utils/firestore';
-import Input from '../shared/Input';
-import InputError from '../shared/InputError';
-import ConfirmButton from '../shared/Buttons/ConfirmButton';
+import Input from '../../components/Input';
+import InputError from '../../components/InputError';
+import ConfirmButton from '../../components/Buttons/ConfirmButton';
 
 export default function SigninInput() {
   const [token, setToken] = useState('');
@@ -19,19 +19,19 @@ export default function SigninInput() {
       .collection('authorizations')
       .get();
 
-    let foundDocument = false;
     collection.forEach((doc) => {
       if (doc.get('token') === token) {
         document.cookie = `email=${doc.get('email')}`;
-        foundDocument = true;
-      }
-    });
 
-    if (!foundDocument) {
+        setEmptyInputError(false);
+
+        router.push('/app');
+
+        return;
+      }
+
       setEmptyInputError(true);
-    } else {
-      router.push('/app');
-    }
+    });
   }
 
   function onKeyPress({ key }) {

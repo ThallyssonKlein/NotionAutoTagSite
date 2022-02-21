@@ -1,11 +1,11 @@
 /* eslint-disable camelcase */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/react-in-jsx-scope */
-import ConnectWithNotion from '../components/app/main/CallToAction';
-// import Header from '../components/app/header';
-import GlobalStyles from '../components/GlobalStyles';
-import firestore from '../utils/firestore';
-import ConnectedWithNotion from '../components/app/main/ConnectedWithNotion';
+import ConnectWithNotion from './main/ConnectWithNotion';
+// import Header from './header';
+import GlobalStyles from '../../components/GlobalStyles';
+import firestore from '../../utils/firestore';
+import ConnectedWithNotion from './main/ConnectedWithNotion';
 
 export default function App({ connected }) {
   return (
@@ -81,9 +81,6 @@ export async function getServerSideProps(context) {
     ).json();
 
     const { email } = context.req.cookies;
-
-    console.log(email);
-
     const documents = await firestore
       .connect()
       .collection('authorizations')

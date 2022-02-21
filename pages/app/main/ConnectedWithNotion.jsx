@@ -1,11 +1,11 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useEffect, useState } from 'react';
 import firebase from 'firebase/app';
-import Input from '../../../shared/Input';
-import ConfirmButton from '../../../shared/Buttons/ConfirmButton';
-import RemoveButton from '../../../shared/Buttons/RemoveButton';
-import InputError from '../../../shared/InputError';
-import firestore from '../../../../utils/firestore';
+import Input from '../../../components/Input';
+import ConfirmButton from '../../../components/Buttons/ConfirmButton';
+import RemoveButton from '../../../components/Buttons/RemoveButton';
+import InputError from '../../../components/InputError';
+import firestore from '../../../utils/firestore';
 
 // needed to update arrays on firestore
 // https://cloud.google.com/firestore/docs/manage-data/add-data#update_elements_in_an_array

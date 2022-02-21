@@ -2,9 +2,9 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useState } from 'react';
 import firestore from '../../utils/firestore';
-import Input from '../shared/Input';
-import InputError from '../shared/InputError';
-import ConfirmButton from '../shared/Buttons/ConfirmButton';
+import Input from '../../components/Input';
+import InputError from '../../components/InputError';
+import ConfirmButton from '../../components/Buttons/ConfirmButton';
 
 export default function TextInput() {
   const [email, setEmail] = useState('');
