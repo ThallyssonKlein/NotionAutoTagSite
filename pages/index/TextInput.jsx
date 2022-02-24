@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable react/react-in-jsx-scope */
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import firestore from '../../utils/firestore';
 import Input from '../../components/Input';
 import InputError from '../../components/InputError';
