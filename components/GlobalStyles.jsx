@@ -48,6 +48,8 @@ export default function GlobalStyles({ children }) {
 
                         --text-error-color: #eb5757;
 
+                        --success-color: #AFE1AF;
+
                         --anchor-color: #2eaadc;
                         --hovered-anchor-color: #3094b0;
 
