@@ -1,12 +1,32 @@
 /* eslint-disable react/react-in-jsx-scope */
+// react
+import { useContext } from 'react';
+
+// components
 import GlobalStyles from '../components/GlobalStyles';
 import TextInput from './index/TextInput';
 import VideoAndEmailWrapper from './index/VideoAndEmailWrapper';
 
+// external libs
+// eslint-disable-next-line import/order
+import Modal from 'react-modal';
+
+// context
+import { IndexPageContext } from '../contexts/IndexPageContext';
+
 export default function Home() {
+  const { modalIsOpen } = useContext(IndexPageContext);
+
   return (
     <GlobalStyles>
       <main>
+        <Modal
+          isOpen={modalIsOpen}
+          contentLabel="Example Modal"
+        >
+          <h2>Loading...</h2>
+        </Modal>
+
         <div className="content">
           <div className="main-text-wrapper">
             <h1>

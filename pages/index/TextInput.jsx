@@ -1,29 +1,41 @@
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable react/react-in-jsx-scope */
-import { useState } from 'react';
+// react
+import { useState, useContext } from 'react';
+
+// config
 import firestore from '../../utils/firestore';
+
+// components
 import Input from '../../components/Input';
 import InputError from '../../components/InputError';
 import SuccessMessage from '../../components/SuccessMessage';
 import ConfirmButton from '../../components/Buttons/ConfirmButton';
 
+// context
+import { IndexPageContext } from '../../contexts/IndexPageContext';
+
 export default function TextInput() {
   const [email, setEmail] = useState('');
   const [emptyInputError, setEmptyInputError] = useState(false);
   const [successMessage, setSuccessMessage] = useState(false);
+  const { setModalIsOpen } = useContext(IndexPageContext);
 
   async function submit() {
+    setModalIsOpen(true);
     const { created } = await firestore.createDocument('leads', null, {
       email,
     });
 
+    setEmail('');
+
     if (!created) {
       setEmptyInputError(true);
+      return;
     }
 
-    setEmail('');
     setSuccessMessage(true);
-    setEmptyInputError(false);
+    setModalIsOpen(false);
   }
 
   function validateEmail() {
