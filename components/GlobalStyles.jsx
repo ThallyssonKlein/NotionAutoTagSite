@@ -94,6 +94,15 @@ export default function GlobalStyles({ children }) {
                         height: 100vh;
                         background-color: var(--background-color);
                     }
+                    .modalcontainer {
+                        position: absolute;
+                        top: 40%;
+                        left: 50%;
+                        margin-top: -50px;
+                        margin-left: -50px;
+                        height: 100%
+                        width: 100%
+                    }
                 `}
       </style>
     </>

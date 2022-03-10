@@ -10,6 +10,10 @@ import VideoAndEmailWrapper from './index/VideoAndEmailWrapper';
 // external libs
 // eslint-disable-next-line import/order
 import Modal from 'react-modal';
+// eslint-disable-next-line import/order
+import { TailSpin } from 'react-loader-spinner';
+// eslint-disable-next-line import/no-unresolved
+// import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 
 // context
 import { IndexPageContext } from '../contexts/IndexPageContext';
@@ -23,8 +27,12 @@ export default function Home() {
         <Modal
           isOpen={modalIsOpen}
           contentLabel="Example Modal"
+          className="modal"
+          centered
         >
-          <h2>Loading...</h2>
+          <div className="modalcontainer">
+            <TailSpin color="#00BFFF" height={80} width={80} />
+          </div>
         </Modal>
 
         <div className="content">
