@@ -183,7 +183,7 @@ export default function ConnectedWithNotion() {
                     color: var(--highlighted-font-color);
                     font-size: var(--content-text-font-size);
                     text-align: center;
-                    margin-bottom: 10px;
+                    margin-bottom: 20px;
                 }
                 .tables {
                     display: flex;
@@ -196,10 +196,10 @@ export default function ConnectedWithNotion() {
                     align-items: center;
                 }
                 .input-table-link {
-                    margin-bottom: 10px;
+                    margin-bottom: 20px;
                 }
                 .add-table {
-                    margin:bottom: 10px;
+                    margin-bottom: 20px;
                 }
             `}
 
