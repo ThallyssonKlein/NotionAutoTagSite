@@ -43,7 +43,17 @@ export default function App({ connected }) {
   );
 }
 
+function extractAccessTokenFromCookies() {
+  const cookies = document.cookie;
+  const access_token = cookies.match(/(?<=access_token=).+?(?=(?:; |$))/)[0];
+  return access_token;
+}
+
 export async function getServerSideProps(context) {
+  if (extractAccessTokenFromCookies()) {
+    return { props: { connected: true } };
+  }
+
   const { code: authorizationCode, error } = context.query;
 
   if (error === 'access_denied') {
@@ -94,6 +104,7 @@ export async function getServerSideProps(context) {
           'access_token',
           access_token,
         );
+        document.cookie = `access_token=${access_token}`;
       }
     });
 
