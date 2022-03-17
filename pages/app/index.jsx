@@ -48,7 +48,7 @@ function extractAccessTokenFromCookies(context) {
 }
 
 export async function getServerSideProps(context) {
-  if (extractAccessTokenFromCookies()) {
+  if (extractAccessTokenFromCookies(context)) {
     return { props: { connected: true } };
   }
 
