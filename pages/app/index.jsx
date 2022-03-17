@@ -43,10 +43,8 @@ export default function App({ connected }) {
   );
 }
 
-function extractAccessTokenFromCookies() {
-  const cookies = document.cookie;
-  const access_token = cookies.match(/(?<=access_token=).+?(?=(?:; |$))/)[0];
-  return access_token;
+function extractAccessTokenFromCookies(context) {
+  return context.req.cookies.access_token;
 }
 
 export async function getServerSideProps(context) {
@@ -104,7 +102,7 @@ export async function getServerSideProps(context) {
           'access_token',
           access_token,
         );
-        document.cookie = `access_token=${access_token}`;
+        context.res.setHeader('set-cookie', `access_token=${access_token}`);
       }
     });
 
