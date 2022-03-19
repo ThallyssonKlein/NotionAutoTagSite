@@ -6,7 +6,7 @@ import ConfirmButton from '../../../components/Buttons/ConfirmButton';
 import RemoveButton from '../../../components/Buttons/RemoveButton';
 import InputError from '../../../components/InputError';
 import firestore from '../../../utils/firestore';
-
+import { extractEmailFromCookies } from '../../../utils/cookies';
 // needed to update arrays on firestore
 // https://cloud.google.com/firestore/docs/manage-data/add-data#update_elements_in_an_array
 
@@ -19,12 +19,6 @@ export default function ConnectedWithNotion() {
   });
 
   const db = firestore.connect();
-
-  function extractEmailFromCookies() {
-    const cookies = document.cookie;
-    const email = cookies.match(/(?<=email=).+?(?=(?:; |$))/)[0];
-    return email;
-  }
 
   function extractDatabaseAndViewId() {
     const path = newTable.split('/')[3];
