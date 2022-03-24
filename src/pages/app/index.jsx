@@ -45,32 +45,31 @@ export default function App() {
       }
 
       if (router.query) {
-        const body = JSON.stringify({
+        const body = {
           grant_type: 'authorization_code',
           code: authorizationCode,
           redirect_uri: (process.env.NODE_ENV === 'development') ? process.env.NEXT_PUBLIC_REDIRECT_URI_DEV : process.env.NEXT_PUBLIC_REDIRECT_URI,
-        });
+        };
 
         let auth;
 
         if (process.env.NODE_ENV === 'development') {
-          Buffer.from(
-            `${process.env.NEXT_PUBLIC_CLIENT_ID_DEV}:${process.env.NEXT_PUBLIC_SECRET_DEV}`,
-          ).toString('base64');
+          auth = btoa(
+            `${process.env.NEXT_PUBLIC_CLIENT_ID_DEV}:${process.env.NEXT_PUBLIC_CLIENT_SECRET_DEV}`,
+          );
         } else {
-          Buffer.from(
-            `${process.env.NEXT_PUBLIC_CLIENT_ID}:${process.env.NEXT_PUBLIC_SECRET}`,
-          ).toString('base64');
+          auth = btoa(
+            `${process.env.NEXT_PUBLIC_CLIENT_ID}:${process.env.NEXT_PUBLIC_CLIENT_SECRET}`,
+          );
         }
 
         const { access_token } = await (
-          await fetch('https://api.notion.com/v1/oauth/token', {
+          await fetch('/api/notion', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              Authorization: `Basic ${auth}`,
             },
-            body,
+            body: JSON.stringify({ body: { ...body }, auth }),
           })
         ).json();
 
