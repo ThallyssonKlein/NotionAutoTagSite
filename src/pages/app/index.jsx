@@ -4,6 +4,8 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Cookies from 'universal-cookie';
+import Modal from 'react-modal';
+import { TailSpin } from 'react-loader-spinner';
 import ConnectWithNotion from './main/ConnectWithNotion';
 // import Header from './header';
 import GlobalStyles from '../../components/GlobalStyles';
@@ -16,16 +18,29 @@ export default function App() {
   const [connected, setConnected] = useState(false);
   const [checked, setChecked] = useState(false);
   const [center, setCenter] = useState([]);
+  const [modalIsOpen, setModalIsOpen] = useState(true);
 
   useEffect(() => {
     if (checked) {
+      setModalIsOpen(false);
       if (connected) {
         setCenter(<ConnectedWithNotion />);
       } else {
         setCenter(<ConnectWithNotion />);
       }
     } else {
-      setCenter(<h1>loading</h1>);
+      setCenter(
+        <Modal
+          isOpen={modalIsOpen}
+          contentLabel="Example Modal"
+          className="modal"
+          centered
+        >
+          <div className="modalcontainer">
+            <TailSpin color="#00BFFF" height={80} width={80} />
+          </div>
+        </Modal>,
+      );
     }
   }, [checked, connected]);
 
