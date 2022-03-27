@@ -1,16 +1,17 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useEffect, useState } from 'react';
 import firebase from 'firebase/app';
+import Cookies from 'universal-cookie';
 import Input from '../../../components/Input';
 import ConfirmButton from '../../../components/Buttons/ConfirmButton';
 import RemoveButton from '../../../components/Buttons/RemoveButton';
 import InputError from '../../../components/InputError';
 import firestore from '../../../utils/firestore';
-import { extractEmailFromCookies } from '../../../utils/cookies';
 // needed to update arrays on firestore
 // https://cloud.google.com/firestore/docs/manage-data/add-data#update_elements_in_an_array
 
 export default function ConnectedWithNotion() {
+  const cookies = new Cookies();
   const [newTable, setNewTable] = useState('');
   const [tables, setTables] = useState([]);
   const [inputError, setInputError] = useState({
@@ -32,7 +33,7 @@ export default function ConnectedWithNotion() {
     const documents = await db.collection('authorizations').get();
 
     documents.forEach(async (doc) => {
-      if (doc.get('email') === extractEmailFromCookies()) {
+      if (doc.get('email') === cookies.get('email')) {
         const documentId = doc.id;
 
         db.collection('authorizations')
@@ -83,7 +84,7 @@ export default function ConnectedWithNotion() {
     const documents = await db.collection('authorizations').get();
 
     documents.forEach(async (doc) => {
-      if (doc.get('email') === extractEmailFromCookies()) {
+      if (doc.get('email') === cookies.get('email')) {
         const userDatabases = doc.get('collections_id');
         const documentId = doc.id;
 
@@ -110,7 +111,7 @@ export default function ConnectedWithNotion() {
     const documents = await db.collection('authorizations').get();
 
     documents.forEach(async (doc) => {
-      if (doc.get('email') === extractEmailFromCookies()) {
+      if (doc.get('email') === cookies.get('email')) {
         const userDatabases = doc.get('collections_id');
 
         // eslint-disable-next-line no-unused-expressions

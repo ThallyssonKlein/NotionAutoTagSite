@@ -2,12 +2,14 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import Cookies from 'universal-cookie';
 import firestore from '../../utils/firestore';
 import Input from '../../components/Input';
 import InputError from '../../components/InputError';
 import ConfirmButton from '../../components/Buttons/ConfirmButton';
 
 export default function SigninInput() {
+  const cookies = new Cookies();
   const [token, setToken] = useState('');
   const [emptyInputError, setEmptyInputError] = useState(false);
   const router = useRouter();
@@ -21,7 +23,7 @@ export default function SigninInput() {
 
     collection.forEach((doc) => {
       if (doc.get('token') === token) {
-        document.cookie = `email=${doc.get('email')}`;
+        cookies.set('email', doc.get('email'));
 
         setEmptyInputError(false);
 

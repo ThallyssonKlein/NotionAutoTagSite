@@ -9,7 +9,6 @@ import ConnectWithNotion from './main/ConnectWithNotion';
 import GlobalStyles from '../../components/GlobalStyles';
 import firestore from '../../utils/firestore';
 import ConnectedWithNotion from './main/ConnectedWithNotion';
-import { extractEmailFromCookies } from '../../utils/cookies';
 
 export default function App() {
   const cookies = new Cookies();
@@ -79,7 +78,7 @@ export default function App() {
           return;
         }
 
-        const email = extractEmailFromCookies();
+        const email = cookies.get('email');
         const documents = await firestore
           .connect()
           .collection('authorizations')
@@ -93,7 +92,6 @@ export default function App() {
               'access_token',
               access_token,
             );
-            cookies.set('access_token', access_token, { path: '/app' });
             setConnected(true);
             setChecked(true);
           }
