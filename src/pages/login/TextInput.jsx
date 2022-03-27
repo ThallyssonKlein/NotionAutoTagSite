@@ -1,3 +1,4 @@
+/* eslint-disable guard-for-in */
 /* eslint-disable react/jsx-no-bind */
 /* eslint-disable react/react-in-jsx-scope */
 import { useState } from 'react';
@@ -8,7 +9,8 @@ import Input from '../../components/Input';
 import InputError from '../../components/InputError';
 import ConfirmButton from '../../components/Buttons/ConfirmButton';
 
-export default function SigninInput() {
+// eslint-disable-next-line react/prop-types
+export default function SigninInput({ setModalIsOpen }) {
   const cookies = new Cookies();
   const [token, setToken] = useState('');
   const [emptyInputError, setEmptyInputError] = useState(false);
@@ -16,24 +18,29 @@ export default function SigninInput() {
 
   // eslint-disable-next-line no-shadow
   async function checkIfTokenIsValid(token) {
+    setModalIsOpen(true);
     const collection = await firestore
       .connect()
       .collection('authorizations')
       .get();
 
-    collection.forEach((doc) => {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const i in collection.docs) {
+      const doc = collection.docs[i];
       if (doc.get('token') === token) {
         cookies.set('email', doc.get('email'));
 
         setEmptyInputError(false);
+        setModalIsOpen(false);
 
         router.push('/app');
 
         return;
       }
+    }
 
-      setEmptyInputError(true);
-    });
+    setModalIsOpen(false);
+    setEmptyInputError(true);
   }
 
   function onKeyPress({ key }) {

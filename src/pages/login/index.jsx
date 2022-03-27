@@ -1,10 +1,25 @@
 /* eslint-disable react/react-in-jsx-scope */
+import { useState } from 'react';
+import Modal from 'react-modal';
+import { TailSpin } from 'react-loader-spinner';
 import GlobalStyles from '../../components/GlobalStyles';
 import TextInput from './TextInput';
 
 export default function SignIn() {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+
   return (
     <GlobalStyles>
+      <Modal
+        isOpen={modalIsOpen}
+        contentLabel="Example Modal"
+        className="modal"
+        centered
+      >
+        <div className="modalcontainer">
+          <TailSpin color="#00BFFF" height={80} width={80} />
+        </div>
+      </Modal>
       <main>
         <div className="content">
           <div className="main-text-wrapper">
@@ -15,7 +30,7 @@ export default function SignIn() {
             </h1>
           </div>
           <div className="token-wrapper">
-            <TextInput />
+            <TextInput setModalIsOpen={setModalIsOpen}/>
           </div>
         </div>
       </main>
