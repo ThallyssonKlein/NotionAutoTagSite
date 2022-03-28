@@ -44,6 +44,35 @@ export default function App() {
     }
   }, [checked, connected]);
 
+  async function useAccessToken(access_token) {
+    const email = cookies.get('email');
+
+    if (!email) {
+      setConnected(false);
+      setChecked(true);
+      return;
+    }
+
+    const documents = await firestore
+      .connect()
+      .collection('authorizations')
+      .get();
+
+    documents.forEach(async (doc) => {
+      if (doc.get('email') === email) {
+        const documentId = doc.id;
+        await firestore.updateDocumentField(
+          `authorizations/${documentId}`,
+          'access_token',
+          access_token,
+        );
+        setConnected(true);
+        setChecked(true);
+        cookies.set('access_token', access_token);
+      }
+    });
+  }
+
   useEffect(() => {
     if (!router.isReady) {
       return;
@@ -52,13 +81,20 @@ export default function App() {
     (async () => {
       const { code: authorizationCode } = router.query;
 
-      if (!authorizationCode) {
+      const access_token_cookie = cookies.get('access_token');
+
+      if (!authorizationCode && !access_token_cookie) {
         setConnected(false);
         setChecked(true);
         return;
       }
 
-      if (router.query) {
+      if (access_token_cookie) {
+        useAccessToken(access_token_cookie);
+        return;
+      }
+
+      if (router.query && !access_token_cookie) {
         const body = {
           grant_type: 'authorization_code',
           code: authorizationCode,
@@ -93,25 +129,11 @@ export default function App() {
           return;
         }
 
-        const email = cookies.get('email');
-        const documents = await firestore
-          .connect()
-          .collection('authorizations')
-          .get();
-
-        documents.forEach(async (doc) => {
-          if (doc.get('email') === email) {
-            const documentId = doc.id;
-            await firestore.updateDocumentField(
-              `authorizations/${documentId}`,
-              'access_token',
-              access_token,
-            );
-            setConnected(true);
-            setChecked(true);
-          }
-        });
+        useAccessToken(access_token);
       }
+
+      setConnected(false);
+      setChecked(true);
     })();
   }, [router.isReady]);
 
