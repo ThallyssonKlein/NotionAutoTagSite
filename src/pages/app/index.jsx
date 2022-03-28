@@ -145,3 +145,16 @@ export default function App() {
     </GlobalStyles>
   );
 }
+
+export async function getServerSideProps(context) {
+  const { email } = context.req.cookies;
+
+  if (!email) {
+    const { res } = context;
+    res.setHeader('location', '/login');
+    res.statusCode = 302;
+    res.end();
+  }
+
+  return { props: {} };
+}

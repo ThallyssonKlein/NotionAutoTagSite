@@ -30,7 +30,7 @@ export default function SignIn() {
             </h1>
           </div>
           <div className="token-wrapper">
-            <TextInput setModalIsOpen={setModalIsOpen}/>
+            <TextInput setModalIsOpen={setModalIsOpen} />
           </div>
         </div>
       </main>
@@ -73,4 +73,17 @@ export default function SignIn() {
       </style>
     </GlobalStyles>
   );
+}
+
+export async function getServerSideProps(context) {
+  const { email } = context.req.cookies;
+
+  if (email) {
+    const { res } = context;
+    res.setHeader('location', '/app');
+    res.statusCode = 302;
+    res.end();
+  }
+
+  return { props: {} };
 }
