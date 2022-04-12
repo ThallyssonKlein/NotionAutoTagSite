@@ -55,7 +55,7 @@ export default function App() {
 
     const documents = await firestore
       .connect()
-      .collection('authorizations')
+      .collection('leads')
       .get();
 
     documents.forEach(async (doc) => {

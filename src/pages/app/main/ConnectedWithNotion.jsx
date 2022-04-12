@@ -36,7 +36,7 @@ export default function ConnectedWithNotion() {
       if (doc.get('email') === cookies.get('email')) {
         const documentId = doc.id;
 
-        db.collection('authorizations')
+        db.collection('leads')
           .doc(documentId)
           .update({
             collections_id:
@@ -89,7 +89,7 @@ export default function ConnectedWithNotion() {
         const documentId = doc.id;
 
         if (userDatabases.length === 1) {
-          db.collection('authorizations')
+          db.collection('leads')
             .doc(documentId)
             .update({ filled: false });
         }
