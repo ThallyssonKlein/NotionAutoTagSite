@@ -68,7 +68,9 @@ export default function App() {
         );
         setConnected(true);
         setChecked(true);
-        cookies.set('access_token', access_token);
+        cookies.set('access_token', access_token, {
+          maxAge: 31536000,
+        });
       }
     });
   }

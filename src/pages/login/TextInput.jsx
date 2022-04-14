@@ -28,7 +28,9 @@ export default function SigninInput({ setModalIsOpen }) {
     for (const i in collection.docs) {
       const doc = collection.docs[i];
       if (doc.get('token') === token) {
-        cookies.set('email', doc.get('email'));
+        cookies.set('email', doc.get('email'), {
+          maxAge: 31536000,
+        });
 
         setEmptyInputError(false);
         setModalIsOpen(false);
