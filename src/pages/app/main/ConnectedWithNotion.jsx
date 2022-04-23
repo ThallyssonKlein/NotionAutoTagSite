@@ -13,6 +13,7 @@ import firestore from '../../../utils/firestore';
 export default function ConnectedWithNotion() {
   const cookies = new Cookies();
   const [newTable, setNewTable] = useState('');
+  const [newTableName, setNewTableName] = useState('');
   const [tables, setTables] = useState([]);
   const [inputError, setInputError] = useState({
     error: false,
@@ -22,7 +23,7 @@ export default function ConnectedWithNotion() {
   const db = firestore.connect();
 
   function extractDatabaseAndViewId() {
-    const path = newTable.split('/')[3];
+    const path = newTable.split('/')[4];
     const [databaseId, viewId] = path.split('?v=');
 
     return { databaseId, viewId };
@@ -30,7 +31,7 @@ export default function ConnectedWithNotion() {
 
   async function saveUserDatabase() {
     const { databaseId } = extractDatabaseAndViewId();
-    const documents = await db.collection('authorizations').get();
+    const documents = await db.collection('leads').get();
 
     documents.forEach(async (doc) => {
       if (doc.get('email') === cookies.get('email')) {
@@ -41,15 +42,22 @@ export default function ConnectedWithNotion() {
           .update({
             collections_id:
                             firebase.firestore.FieldValue.arrayUnion(
-                              databaseId,
+                              {
+                                databaseId,
+                                name: newTableName,
+                              },
                             ),
             filled: true,
           });
       }
     });
 
-    setTables([...tables, databaseId]);
+    setTables([...tables, {
+      name: newTableName,
+      databaseId,
+    }]);
     setNewTable('');
+    setNewTableName('');
   }
 
   function checkForDuplicatedTable() {
@@ -68,6 +76,14 @@ export default function ConnectedWithNotion() {
       return;
     }
 
+    if (newTableName.length === 0) {
+      setInputError({
+        error: true,
+        message: 'You cannot add links without a name',
+      });
+      return;
+    }
+
     if (checkForDuplicatedTable()) {
       setInputError({
         error: true,
@@ -81,7 +97,7 @@ export default function ConnectedWithNotion() {
   }
 
   async function removeTable(table) {
-    const documents = await db.collection('authorizations').get();
+    const documents = await db.collection('leads').get();
 
     documents.forEach(async (doc) => {
       if (doc.get('email') === cookies.get('email')) {
@@ -94,21 +110,24 @@ export default function ConnectedWithNotion() {
             .update({ filled: false });
         }
 
-        db.collection('authorizations')
+        db.collection('leads')
           .doc(documentId)
           .update({
             collections_id:
-                            firebase.firestore.FieldValue.arrayRemove(table),
+                            firebase.firestore.FieldValue.arrayRemove({
+                              databaseId: table.databaseId,
+                              name: table.name,
+                            }),
           });
       }
     });
 
-    const newTables = tables.filter((localTables) => localTables !== table);
+    const newTables = tables.filter((localTables) => localTables.databaseId !== table.databaseId);
     setTables(newTables);
   }
 
   useEffect(async () => {
-    const documents = await db.collection('authorizations').get();
+    const documents = await db.collection('leads').get();
 
     documents.forEach(async (doc) => {
       if (doc.get('email') === cookies.get('email')) {
@@ -121,6 +140,10 @@ export default function ConnectedWithNotion() {
       }
     });
   }, []);
+
+  function onKeyPress({ key }) {
+    return key === 'Enter' ? addTableToList() : null;
+  }
 
   return (
     <>
@@ -135,7 +158,17 @@ export default function ConnectedWithNotion() {
               value={newTable}
               setValue={setNewTable}
               placeholder="Paste your database link here"
+              onKeyPress={onKeyPress}
             />
+            <div className="second-input">
+              <Input
+                type="text"
+                value={newTableName}
+                setValue={setNewTableName}
+                placeholder="What's the name of the database?"
+                onKeyPress={onKeyPress}
+              />
+            </div>
             <div className="empty-input-error">
               {inputError.error && (
                 <InputError text={inputError.message} />
@@ -153,13 +186,13 @@ export default function ConnectedWithNotion() {
             <div>
               <ul className="tables">
                 {tables
-                                    && tables.map((table, index) => (
+                                    && tables.map((table) => (
                                       // eslint-disable-next-line react/no-array-index-key
-                                      <li className="table" key={index}>
+                                      <li className="table" key={table.databaseId}>
                                         <p>
                                           Table:
                                           {' '}
-                                          {index}
+                                          {table.name}
                                         </p>
                                         <RemoveButton
                                           onClick={() => removeTable(table)}
@@ -195,6 +228,10 @@ export default function ConnectedWithNotion() {
                 }
                 .add-table {
                     margin-bottom: 20px;
+                }
+                .second-input {
+                    margin-top: 20px;
+                    margin-bottom: 10px;
                 }
             `}
 

@@ -62,7 +62,7 @@ export default function App() {
       if (doc.get('email') === email) {
         const documentId = doc.id;
         await firestore.updateDocumentField(
-          `authorizations/${documentId}`,
+          `leads/${documentId}`,
           'access_token',
           access_token,
         );
